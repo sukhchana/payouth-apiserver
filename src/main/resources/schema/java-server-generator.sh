@@ -1,0 +1,1 @@
+openapi-generator-cli generate -g spring -o generated -i openapischema.yaml --additional-properties=modelPackage=org.payouth.apiserver.model,apiPackage=org.payouth.apiserver.api,interfaceOnly=true,skipDefaultInterface=true,serializableModel=true
