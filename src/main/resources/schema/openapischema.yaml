@@ -463,19 +463,9 @@ components:
           type: string
         latitude:
           type: string
-    Gender:
-      type: string
-      enum:
-        - male
-        - female
-        - other
     User:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          example: 10
         firstName:
           type: string
           example: John
@@ -483,7 +473,7 @@ components:
           type: string
           example: James
         gender:
-          $ref: '#/components/schemas/Gender'
+          type: string
         dateOfBirth:
           type: string
           example: 01/01/1990
@@ -492,18 +482,10 @@ components:
         email:
           type: string
           example: john@email.com
-        location:
-          type: object
-          properties:
-            longitude:
-              type: string
-            latitude:
-              type: string
-        completedStages:
-          type: array
-          description: The stage ids the user have completed
-          items:
+        county:
             type: string
+
+
     Election:
       type: object
       properties:

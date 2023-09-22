@@ -1,73 +1,53 @@
 package org.payouth.apiserver.model;
 
-import java.net.URI;
-import java.util.Objects;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIgnore;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.payouth.apiserver.model.Gender;
-import org.payouth.apiserver.model.UserLocation;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.io.Serializable;
-import java.time.OffsetDateTime;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
-
-import java.util.*;
 import javax.annotation.Generated;
+import javax.validation.Valid;
+import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * User
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T10:47:57.186928900-04:00[America/New_York]")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@DynamoDBTable(tableName = "user_data")
 public class User implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  private Long id;
-
-  private String firstName;
-
-  private String lastName;
-
-  private Gender gender;
-
-  private String dateOfBirth;
-
-  private String race;
-
+  @DynamoDBHashKey
   private String email;
 
-  private UserLocation location;
+  @DynamoDBAttribute
+  private String firstName;
 
-  @Valid
-  private List<String> completedStages;
+  @DynamoDBAttribute
+  private String lastName;
 
-  public User id(Long id) {
-    this.id = id;
-    return this;
-  }
+  @DynamoDBAttribute
+  private String gender;
 
-  /**
-   * Get id
-   * @return id
-  */
-  
-  @Schema(name = "id", example = "10", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("id")
-  public Long getId() {
-    return id;
-  }
+  @DynamoDBAttribute
+  private String dateOfBirth;
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+  @DynamoDBAttribute
+  private String race;
+
+  @DynamoDBAttribute
+  private String county;
 
   public User firstName(String firstName) {
     this.firstName = firstName;
@@ -77,8 +57,8 @@ public class User implements Serializable {
   /**
    * Get firstName
    * @return firstName
-  */
-  
+   */
+
   @Schema(name = "firstName", example = "John", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("firstName")
   public String getFirstName() {
@@ -97,8 +77,8 @@ public class User implements Serializable {
   /**
    * Get lastName
    * @return lastName
-  */
-  
+   */
+
   @Schema(name = "lastName", example = "James", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("lastName")
   public String getLastName() {
@@ -109,7 +89,7 @@ public class User implements Serializable {
     this.lastName = lastName;
   }
 
-  public User gender(Gender gender) {
+  public User gender(String gender) {
     this.gender = gender;
     return this;
   }
@@ -117,15 +97,15 @@ public class User implements Serializable {
   /**
    * Get gender
    * @return gender
-  */
-  @Valid 
+   */
+  @Valid
   @Schema(name = "gender", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("gender")
-  public Gender getGender() {
+  public String getGender() {
     return gender;
   }
 
-  public void setGender(Gender gender) {
+  public void setGender(String gender) {
     this.gender = gender;
   }
 
@@ -137,8 +117,8 @@ public class User implements Serializable {
   /**
    * Get dateOfBirth
    * @return dateOfBirth
-  */
-  
+   */
+
   @Schema(name = "dateOfBirth", example = "01/01/1990", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("dateOfBirth")
   public String getDateOfBirth() {
@@ -157,8 +137,8 @@ public class User implements Serializable {
   /**
    * Get race
    * @return race
-  */
-  
+   */
+
   @Schema(name = "race", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("race")
   public String getRace() {
@@ -177,8 +157,8 @@ public class User implements Serializable {
   /**
    * Get email
    * @return email
-  */
-  
+   */
+
   @Schema(name = "email", example = "john@email.com", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("email")
   public String getEmail() {
@@ -189,52 +169,24 @@ public class User implements Serializable {
     this.email = email;
   }
 
-  public User location(UserLocation location) {
-    this.location = location;
+  public User county(String county) {
+    this.county = county;
     return this;
   }
 
   /**
-   * Get location
-   * @return location
-  */
-  @Valid 
-  @Schema(name = "location", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("location")
-  public UserLocation getLocation() {
-    return location;
+   * Get county
+   * @return county
+   */
+
+  @Schema(name = "county", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("county")
+  public String getCounty() {
+    return county;
   }
 
-  public void setLocation(UserLocation location) {
-    this.location = location;
-  }
-
-  public User completedStages(List<String> completedStages) {
-    this.completedStages = completedStages;
-    return this;
-  }
-
-  public User addCompletedStagesItem(String completedStagesItem) {
-    if (this.completedStages == null) {
-      this.completedStages = new ArrayList<>();
-    }
-    this.completedStages.add(completedStagesItem);
-    return this;
-  }
-
-  /**
-   * Get completedStages
-   * @return completedStages
-  */
-  
-  @Schema(name = "completedStages", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("completedStages")
-  public List<String> getCompletedStages() {
-    return completedStages;
-  }
-
-  public void setCompletedStages(List<String> completedStages) {
-    this.completedStages = completedStages;
+  public void setCounty(String county) {
+    this.county = county;
   }
 
   @Override
@@ -246,35 +198,31 @@ public class User implements Serializable {
       return false;
     }
     User user = (User) o;
-    return Objects.equals(this.id, user.id) &&
-        Objects.equals(this.firstName, user.firstName) &&
-        Objects.equals(this.lastName, user.lastName) &&
-        Objects.equals(this.gender, user.gender) &&
-        Objects.equals(this.dateOfBirth, user.dateOfBirth) &&
-        Objects.equals(this.race, user.race) &&
-        Objects.equals(this.email, user.email) &&
-        Objects.equals(this.location, user.location) &&
-        Objects.equals(this.completedStages, user.completedStages);
+    return Objects.equals(this.firstName, user.firstName) &&
+            Objects.equals(this.lastName, user.lastName) &&
+            Objects.equals(this.gender, user.gender) &&
+            Objects.equals(this.dateOfBirth, user.dateOfBirth) &&
+            Objects.equals(this.race, user.race) &&
+            Objects.equals(this.email, user.email) &&
+            Objects.equals(this.county, user.county);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, lastName, gender, dateOfBirth, race, email, location, completedStages);
+    return Objects.hash(firstName, lastName, gender, dateOfBirth, race, email, county);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class User {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
     sb.append("    gender: ").append(toIndentedString(gender)).append("\n");
     sb.append("    dateOfBirth: ").append(toIndentedString(dateOfBirth)).append("\n");
     sb.append("    race: ").append(toIndentedString(race)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
-    sb.append("    location: ").append(toIndentedString(location)).append("\n");
-    sb.append("    completedStages: ").append(toIndentedString(completedStages)).append("\n");
+    sb.append("    county: ").append(toIndentedString(county)).append("\n");
     sb.append("}");
     return sb.toString();
   }
