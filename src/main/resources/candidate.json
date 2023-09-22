@@ -4,7 +4,7 @@
     "firstName": "John",
     "lastName": "Smith",
     "party": "Democratic",
-    "picture": "s3://pa-youth-candidate/candidate_7.jpg",
+    "picture": "https://pa-youth-candidate.s3.amazonaws.com/candidate_7.jpg",
     "summary": "Democratic",
     "pledges": [
       "Reduce Income Inequality",
@@ -23,7 +23,7 @@
     "firstName": "Jennifer",
     "lastName": "Brown",
     "party": "Republican",
-    "picture": "s3://pa-youth-candidate/candidate_5.jpg",
+    "picture": "https://pa-youth-candidate.s3.amazonaws.com/candidate_5.jpg",
     "pledges": [
       "Border Security",
       "Second Amendment Rights",
