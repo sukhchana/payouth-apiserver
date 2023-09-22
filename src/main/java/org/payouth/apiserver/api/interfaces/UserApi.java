@@ -32,7 +32,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T14:00:54.095837700-04:00[America/New_York]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T15:20:41.191412500-04:00[America/New_York]")
 @Validated
 @Tag(name = "user", description = "Operations about user")
 public interface UserApi {
@@ -90,40 +90,6 @@ public interface UserApi {
     )
     ResponseEntity<Void> deleteUser(
         @Parameter(name = "email", description = "The name that needs to be deleted", required = true, in = ParameterIn.PATH) @PathVariable("email") String email
-    );
-
-
-    /**
-     * GET /users : Filter users
-     * Retrieve a list of users based on filter criteria.
-     *
-     * @param birthYear Filter users by birth year. (optional)
-     * @param gender Filter users by gender. (optional)
-     * @return Successful response (status code 200)
-     *         or Bad request (status code 400)
-     *         or Not Found (status code 404)
-     */
-    @Operation(
-        operationId = "filterUsers",
-        summary = "Filter users",
-        description = "Retrieve a list of users based on filter criteria.",
-        tags = { "user" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Successful response", content = {
-                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = User.class)))
-            }),
-            @ApiResponse(responseCode = "400", description = "Bad request"),
-            @ApiResponse(responseCode = "404", description = "Not Found")
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/users",
-        produces = { "application/json" }
-    )
-    ResponseEntity<List<User>> filterUsers(
-        @Parameter(name = "birthYear", description = "Filter users by birth year.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "birthYear", required = false) Integer birthYear,
-        @Parameter(name = "gender", description = "Filter users by gender.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "gender", required = false) String gender
     );
 
 

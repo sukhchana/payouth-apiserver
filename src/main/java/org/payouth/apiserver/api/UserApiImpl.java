@@ -18,7 +18,6 @@ public class UserApiImpl implements UserApi {
     private UserService service;
     @Override
     public ResponseEntity<User> createUser(User user) {
-
         return ResponseEntity.ok(service.createUser(user));
     }
 
@@ -28,10 +27,6 @@ public class UserApiImpl implements UserApi {
         return ResponseEntity.noContent().build();
     }
 
-    @Override
-    public ResponseEntity<List<User>> filterUsers(Integer birthYear, String gender) {
-        return ResponseEntity.ok(service.filterUsers(birthYear,gender));
-    }
 
     @Override
     public ResponseEntity<User> getUserByEmail(String email) {

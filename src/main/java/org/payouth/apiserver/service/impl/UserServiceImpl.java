@@ -27,13 +27,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(String email) {
-        User user = repository.findByEmail(email).orElseThrow();
-        repository.delete(user);
-    }
-
-    @Override
-    public List<User> filterUsers(Integer birthYear, String gender) {
-        return repository.findByDateOfBirthAndGender(birthYear,gender);
+        Optional<User> existed = repository.findByEmail(email);
+        if(existed.isEmpty()){
+            throw new RuntimeException("User with email: "+email+" is not found");
+        }
+        repository.delete(existed.get());
     }
 
     @Override
@@ -43,8 +41,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(String email, User user) {
-        User current = repository.findByEmail(email).orElseThrow();
-        BeanUtils.copyProperties(current,user);
-        repository.save(current);
+        Optional<User> current = repository.findByEmail(email);
+        if(current.isEmpty()){
+            throw new RuntimeException("User with email: "+email+" is not found");
+        }
+        User target = current.get();
+        BeanUtils.copyProperties(target,user);
+        repository.save(target);
     }
 }
