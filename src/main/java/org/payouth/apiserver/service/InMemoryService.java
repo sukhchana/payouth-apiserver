@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.payouth.apiserver.model.Election;
+import org.payouth.apiserver.model.ElectionStage;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,6 +48,25 @@ public class InMemoryService {
     public void deleteElection(String electionId) {
         elections.removeIf(election -> election.getId().equals(electionId));
     }
+
+    public List<ElectionStage> getElectionStages(String electionId) {
+        return getElection(electionId)
+                .orElseThrow(() -> new NotFoundException("electionId="+electionId+" is not found."))
+                .getStages();
+    }
+
+    public ElectionStage createElectionStage(String electionId, ElectionStage electionStage) {
+        getElectionStages(electionId).add(electionStage);
+        return electionStage;
+    }
+
+    public void deleteElectionStage(String electionId, String stageId) {
+        getElectionStages(electionId).removeIf(electionStage -> electionStage.getId().equals(stageId));
+    }
+
+
+
+
 
 
 

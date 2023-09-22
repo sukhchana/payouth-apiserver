@@ -28,7 +28,7 @@ public class Election implements Serializable {
   private String details;
 
   @Valid
-  private List<@Valid CreateElectionRequestStagesInner> stages;
+  private List<@Valid ElectionStage> stages;
 
   private List<Comment>  comments;
 
@@ -92,12 +92,12 @@ public class Election implements Serializable {
     this.details = details;
   }
 
-  public Election stages(List<@Valid CreateElectionRequestStagesInner> stages) {
+  public Election stages(List<@Valid ElectionStage> stages) {
     this.stages = stages;
     return this;
   }
 
-  public Election addStagesItem(CreateElectionRequestStagesInner stagesItem) {
+  public Election addStagesItem(ElectionStage stagesItem) {
     if (this.stages == null) {
       this.stages = new ArrayList<>();
     }
@@ -112,11 +112,11 @@ public class Election implements Serializable {
   @Valid 
   @Schema(name = "stages", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("stages")
-  public List<@Valid CreateElectionRequestStagesInner> getStages() {
+  public List<@Valid ElectionStage> getStages() {
     return stages;
   }
 
-  public void setStages(List<@Valid CreateElectionRequestStagesInner> stages) {
+  public void setStages(List<@Valid ElectionStage> stages) {
     this.stages = stages;
   }
 

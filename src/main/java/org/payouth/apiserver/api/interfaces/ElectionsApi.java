@@ -13,8 +13,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.payouth.apiserver.model.CreateElectionRequestStagesInner;
 import org.payouth.apiserver.model.Election;
+import org.payouth.apiserver.model.ElectionStage;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -65,7 +65,7 @@ public interface ElectionsApi {
      * Create a new Election Stage.
      *
      * @param electionId Election ID (required)
-     * @param createElectionRequestStagesInner Created Election object (optional)
+     * @param createElectionStageRequest Created Election object (optional)
      * @return successful operation (status code 200)
      */
     @Operation(
@@ -75,7 +75,7 @@ public interface ElectionsApi {
         tags = { "stages" },
         responses = {
             @ApiResponse(responseCode = "default", description = "successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateElectionRequestStagesInner.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ElectionStage.class))
             })
         }
     )
@@ -85,9 +85,9 @@ public interface ElectionsApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    ResponseEntity<CreateElectionRequestStagesInner> createElectionStage(
+    ResponseEntity<ElectionStage> createElectionStage(
         @Parameter(name = "electionId", description = "Election ID", required = true, in = ParameterIn.PATH) @PathVariable("electionId") String electionId,
-        @Parameter(name = "CreateElectionRequestStagesInner", description = "Created Election object") @Valid @RequestBody(required = false) CreateElectionRequestStagesInner createElectionRequestStagesInner
+        @Parameter(name = "createElectionStageRequest", description = "Created Election object") @Valid @RequestBody(required = false) ElectionStage createElectionStageRequest
     );
 
 
@@ -185,7 +185,7 @@ public interface ElectionsApi {
         tags = { "stages" },
         responses = {
             @ApiResponse(responseCode = "200", description = "successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateElectionRequestStagesInner.class))
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ElectionStage.class)))
             })
         }
     )
@@ -194,7 +194,7 @@ public interface ElectionsApi {
         value = "/elections/{electionId}/stages",
         produces = { "application/json" }
     )
-    ResponseEntity<CreateElectionRequestStagesInner> getElectionStages(
+    ResponseEntity<List<ElectionStage>> getElectionStages(
         @Parameter(name = "electionId", description = "Election ID", required = true, in = ParameterIn.PATH) @PathVariable("electionId") String electionId
     );
 

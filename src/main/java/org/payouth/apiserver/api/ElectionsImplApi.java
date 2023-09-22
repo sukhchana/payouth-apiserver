@@ -2,11 +2,12 @@ package org.payouth.apiserver.api;
 
 import lombok.AllArgsConstructor;
 import org.payouth.apiserver.api.interfaces.ElectionsApi;
+import org.payouth.apiserver.model.ElectionStage;
 import org.payouth.apiserver.service.InMemoryService;
-import org.payouth.apiserver.model.CreateElectionRequestStagesInner;
 import org.payouth.apiserver.model.Election;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.webjars.NotFoundException;
 
 import java.util.List;
 
@@ -33,12 +34,17 @@ public class ElectionsImplApi implements ElectionsApi {
      * Create a new Election Stage.
      *
      * @param electionId                       Election ID (required)
-     * @param createElectionRequestStagesInner Created Election object (optional)
+     * @param createElectionStagesRequest Created Election object (optional)
      * @return successful operation (status code 200)
      */
     @Override
-    public ResponseEntity<CreateElectionRequestStagesInner> createElectionStage(String electionId, CreateElectionRequestStagesInner createElectionRequestStagesInner) {
-        return null;
+    public ResponseEntity<ElectionStage> createElectionStage(String electionId, ElectionStage createElectionStagesRequest) {
+        try {
+            return ResponseEntity.ok(electionsCache.createElectionStage(electionId, createElectionStagesRequest));
+        }
+        catch (NotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     /**
@@ -66,7 +72,13 @@ public class ElectionsImplApi implements ElectionsApi {
      */
     @Override
     public ResponseEntity<Void> deleteElectionStage(String electionId, String stageId) {
-        return null;
+        try {
+            electionsCache.deleteElectionStage(electionId, stageId);
+            return ResponseEntity.ok().build();
+        }
+        catch (NotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     /**
@@ -88,8 +100,13 @@ public class ElectionsImplApi implements ElectionsApi {
      * @return successful operation (status code 200)
      */
     @Override
-    public ResponseEntity<CreateElectionRequestStagesInner> getElectionStages(String electionId) {
-        return null;
+    public ResponseEntity<List<ElectionStage>> getElectionStages(String electionId) {
+        try {
+            return ResponseEntity.ok(electionsCache.getElectionStages(electionId));
+        }
+        catch (NotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     /**
