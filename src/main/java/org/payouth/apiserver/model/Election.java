@@ -30,7 +30,7 @@ public class Election implements Serializable {
   @Valid
   private List<@Valid CreateElectionRequestStagesInner> stages;
 
-  private JsonNullable<Object> comments = JsonNullable.<Object>undefined();
+  private List<Comment>  comments;
 
   public Election id(String id) {
     this.id = id;
@@ -120,8 +120,8 @@ public class Election implements Serializable {
     this.stages = stages;
   }
 
-  public Election comments(Object comments) {
-    this.comments = JsonNullable.of(comments);
+  public Election comments(List<Comment>  comments) {
+    this.comments = comments;
     return this;
   }
 
@@ -132,11 +132,11 @@ public class Election implements Serializable {
   
   @Schema(name = "comments", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("comments")
-  public JsonNullable<Object> getComments() {
+  public List<Comment>  getComments() {
     return comments;
   }
 
-  public void setComments(JsonNullable<Object> comments) {
+  public void setComments(List<Comment>  comments) {
     this.comments = comments;
   }
 
@@ -153,7 +153,7 @@ public class Election implements Serializable {
         Objects.equals(this.name, election.name) &&
         Objects.equals(this.details, election.details) &&
         Objects.equals(this.stages, election.stages) &&
-        equalsNullable(this.comments, election.comments);
+        Objects.equals(this.comments, election.comments);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -162,7 +162,7 @@ public class Election implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, details, stages, hashCodeNullable(comments));
+    return Objects.hash(id, name, details, stages, comments);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {

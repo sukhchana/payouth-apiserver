@@ -13,7 +13,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.payouth.apiserver.model.CreateElectionRequest;
 import org.payouth.apiserver.model.CreateElectionRequestStagesInner;
 import org.payouth.apiserver.model.Election;
 import org.springframework.http.ResponseEntity;
@@ -46,7 +45,7 @@ public interface ElectionsApi {
         tags = { "election" },
         responses = {
             @ApiResponse(responseCode = "default", description = "successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateElectionRequest.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Election.class))
             })
         }
     )
@@ -56,8 +55,8 @@ public interface ElectionsApi {
         produces = { "application/json" },
         consumes = { "application/json" }
     )
-    ResponseEntity<CreateElectionRequest> createElection(
-        @Parameter(name = "CreateElectionRequest", description = "Created Election object") @Valid @RequestBody(required = false) CreateElectionRequest createElectionRequest
+    ResponseEntity<Election> createElection(
+        @Parameter(name = "CreateElectionRequest", description = "Created Election object") @Valid @RequestBody(required = false) Election createElectionRequest
     );
 
 
@@ -160,7 +159,7 @@ public interface ElectionsApi {
         tags = { "election" },
         responses = {
             @ApiResponse(responseCode = "200", description = "successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateElectionRequest.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Election.class))
             })
         }
     )
@@ -169,7 +168,7 @@ public interface ElectionsApi {
         value = "/elections/{electionId}",
         produces = { "application/json" }
     )
-    ResponseEntity<CreateElectionRequest> getElectionById(
+    ResponseEntity<Election> getElectionById(
         @Parameter(name = "electionId", description = "Election ID", required = true, in = ParameterIn.PATH) @PathVariable("electionId") String electionId
     );
 

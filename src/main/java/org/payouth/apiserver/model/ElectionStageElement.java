@@ -1,5 +1,6 @@
 package org.payouth.apiserver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -16,6 +17,7 @@ import java.util.Objects;
 
 @Schema(name = "ElectionStageElement", description = "Generic Stage Elements that can be associated with various stages")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-21T23:36:10.667381+01:00[Europe/London]")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ElectionStageElement implements Serializable {
 
   private static final long serialVersionUID = 1L;

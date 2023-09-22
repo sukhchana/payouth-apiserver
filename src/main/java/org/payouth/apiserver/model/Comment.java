@@ -1,5 +1,6 @@
 package org.payouth.apiserver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -17,6 +18,7 @@ public class Comment implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
+  @JsonIgnore
   private String id;
 
   private String username;
