@@ -3,6 +3,7 @@ package org.payouth.apiserver.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.payouth.apiserver.model.Comment;
 import org.payouth.apiserver.model.Election;
 import org.payouth.apiserver.model.ElectionStage;
 import org.springframework.stereotype.Service;
@@ -55,6 +56,10 @@ public class InMemoryService {
                 .getStages();
     }
 
+    public Optional<ElectionStage> getElectionStage(String electionId, String stageId) {
+        return getElectionStages(electionId).stream().filter(stage -> stage.getId().equals(stageId)).findAny();
+    }
+
     public ElectionStage createElectionStage(String electionId, ElectionStage electionStage) {
         getElectionStages(electionId).add(electionStage);
         return electionStage;
@@ -63,6 +68,30 @@ public class InMemoryService {
     public void deleteElectionStage(String electionId, String stageId) {
         getElectionStages(electionId).removeIf(electionStage -> electionStage.getId().equals(stageId));
     }
+
+    public List<Comment> getAllCommentsInElection(String electionId) {
+        return getElection(electionId)
+                .orElseThrow(() -> new NotFoundException("electionId="+electionId+" is not found."))
+                .getComments();
+    }
+
+    public List<Comment> getAllCommentsInStage(String electionId, String stageId) {
+        return getElectionStage(electionId,stageId)
+                .orElseThrow(() -> new NotFoundException("stageId="+stageId+" and electionId="+electionId+" is not found."))
+                .getComments();
+    }
+
+    public Comment postCommentInElection(String electionId, Comment comment) {
+        getAllCommentsInElection(electionId).add(comment);
+        return comment;
+    }
+
+    public Comment postCommentInStage(String electionId, String stageId, Comment comment) {
+        getAllCommentsInStage(electionId, stageId).add(comment);
+        return comment;
+    }
+
+
 
 
 

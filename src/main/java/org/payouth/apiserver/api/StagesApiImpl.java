@@ -1,10 +1,9 @@
 package org.payouth.apiserver.api;
 
 import lombok.AllArgsConstructor;
-import org.payouth.apiserver.api.interfaces.ElectionsApi;
+import org.payouth.apiserver.api.interfaces.StagesApi;
 import org.payouth.apiserver.model.ElectionStage;
 import org.payouth.apiserver.service.InMemoryService;
-import org.payouth.apiserver.model.Election;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.webjars.NotFoundException;
@@ -13,21 +12,10 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-public class ElectionsImplApi implements ElectionsApi {
+public class StagesApiImpl implements StagesApi {
 
     private InMemoryService electionsCache;
 
-    /**
-     * POST /elections : Create Election
-     * Create a new Election.
-     *
-     * @param createElectionRequest Created Election object (optional)
-     * @return successful operation (status code 200)
-     */
-    @Override
-    public ResponseEntity<Election> createElection(Election createElectionRequest) {
-        return ResponseEntity.ok(electionsCache.createElection(createElectionRequest));
-    }
 
     /**
      * POST /elections/{electionId}/stages : Create Election Stage
@@ -45,20 +33,6 @@ public class ElectionsImplApi implements ElectionsApi {
         catch (NotFoundException e) {
             return ResponseEntity.notFound().build();
         }
-    }
-
-    /**
-     * DELETE /elections/{electionId} : Delete election
-     * Delete Election
-     *
-     * @param electionId The election that needs to be deleted (required)
-     * @return Invalid electionId supplied (status code 400)
-     * or electionId not found (status code 404)
-     */
-    @Override
-    public ResponseEntity<Void> deleteElection(String electionId) {
-        electionsCache.deleteElection(electionId);
-        return ResponseEntity.noContent().build();
     }
 
     /**
@@ -80,19 +54,6 @@ public class ElectionsImplApi implements ElectionsApi {
             return ResponseEntity.notFound().build();
         }
     }
-
-    /**
-     * GET /elections/{electionId} : Returns a specific election
-     *
-     * @param electionId Election ID (required)
-     * @return successful operation (status code 200)
-     */
-    @Override
-    public ResponseEntity<Election> getElectionById(String electionId) {
-        var election = electionsCache.getElection(electionId);
-        return election.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
     /**
      * GET /elections/{electionId}/stages : Returns Election Stages
      *
@@ -107,15 +68,5 @@ public class ElectionsImplApi implements ElectionsApi {
         catch (NotFoundException e) {
             return ResponseEntity.notFound().build();
         }
-    }
-
-    /**
-     * GET /elections : Returns list of elections
-     *
-     * @return successful operation (status code 200)
-     */
-    @Override
-    public ResponseEntity<List<Election>> getElections() {
-        return ResponseEntity.ok(electionsCache.getElections());
     }
 }
