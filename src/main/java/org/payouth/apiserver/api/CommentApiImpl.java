@@ -3,7 +3,7 @@ package org.payouth.apiserver.api;
 import lombok.AllArgsConstructor;
 import org.payouth.apiserver.api.interfaces.CommentsApi;
 import org.payouth.apiserver.model.Comment;
-import org.payouth.apiserver.service.InMemoryService;
+import org.payouth.apiserver.service.ElectionsInMemoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @CrossOrigin()
 public class CommentApiImpl implements CommentsApi {
-    private InMemoryService electionsCache;
+    private ElectionsInMemoryService electionsCache;
 
     /**
      * GET /elections/{electionId}/comments : Get all comment for Election

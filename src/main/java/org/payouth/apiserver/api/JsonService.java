@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.payouth.apiserver.model.Election;
-import org.payouth.apiserver.service.InMemoryService;
+import org.payouth.apiserver.service.ElectionsInMemoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +23,7 @@ import java.util.List;
 @CrossOrigin()
 public class JsonService {
 
-    private InMemoryService electionsCache;
+    private ElectionsInMemoryService electionsCache;
 
     /**
      * POST /json : Add raw election data as json
