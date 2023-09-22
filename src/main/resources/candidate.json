@@ -34,8 +34,64 @@
       "Strong National Defense",
       "Tax Reform"
     ],
-    "summary": "Republican challenger",
+    "summary": "Climate change is a global crisis, and we must transition to renewable energy sources to combat it.",
+    "incumbent": false
+  },
+  {
+    "id": "3",
+    "firstName": "Robert",
+    "lastName": "Smith",
+    "party": "Republican",
+    "picture": "https://pa-youth-candidate.s3.amazonaws.com/candidate_2.jpg",
+    "pledges": [
+      "Border Security",
+      "Second Amendment Rights",
+      "Pro-Life Stance"
+    ],
+    "policies": [
+      "Economic Deregulation",
+      "Strong National Defense",
+      "Tax Reform"
+    ],
+    "summary": "Education for all",
+    "incumbent": false
+  },
+  {
+    "firstName": "Emily",
+    "id": "4",
+    "lastName": "Johnson",
+    "party": "Republican",
+    "picture": "https://pa-youth-candidate.s3.amazonaws.com/candidate_10.jpg",
+    "pledges": [
+      "Border Security",
+      "Second Amendment Rights",
+      "Pro-Life Stance"
+    ],
+    "policies": [
+      "Economic Deregulation",
+      "Strong National Defense",
+      "Tax Reform"
+    ],
+    "summary": "Passionate about solving housing crises",
+    "incumbent": false
+  },
+  {
+    "firstName": "Sarah",
+    "id": "5",
+    "lastName": "Davis",
+    "party": "Republican",
+    "picture": "https://pa-youth-candidate.s3.amazonaws.com/candidate_9.jpg",
+    "pledges": [
+      "Border Security",
+      "Second Amendment Rights",
+      "Pro-Life Stance"
+    ],
+    "policies": [
+      "Economic Deregulation",
+      "Strong National Defense",
+      "Tax Reform"
+    ],
+    "summary": "We believe in reducing taxes to stimulate economic growth and job creation.",
     "incumbent": false
   }
-
 ]
