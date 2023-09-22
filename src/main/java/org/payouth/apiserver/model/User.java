@@ -25,14 +25,12 @@ import javax.annotation.Generated;
  * User
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T10:25:30.542949600-04:00[America/New_York]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T10:47:57.186928900-04:00[America/New_York]")
 public class User implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
   private Long id;
-
-  private String username;
 
   private String firstName;
 
@@ -69,26 +67,6 @@ public class User implements Serializable {
 
   public void setId(Long id) {
     this.id = id;
-  }
-
-  public User username(String username) {
-    this.username = username;
-    return this;
-  }
-
-  /**
-   * Get username
-   * @return username
-  */
-  
-  @Schema(name = "username", example = "theUser", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("username")
-  public String getUsername() {
-    return username;
-  }
-
-  public void setUsername(String username) {
-    this.username = username;
   }
 
   public User firstName(String firstName) {
@@ -269,7 +247,6 @@ public class User implements Serializable {
     }
     User user = (User) o;
     return Objects.equals(this.id, user.id) &&
-        Objects.equals(this.username, user.username) &&
         Objects.equals(this.firstName, user.firstName) &&
         Objects.equals(this.lastName, user.lastName) &&
         Objects.equals(this.gender, user.gender) &&
@@ -282,7 +259,7 @@ public class User implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, username, firstName, lastName, gender, dateOfBirth, race, email, location, completedStages);
+    return Objects.hash(id, firstName, lastName, gender, dateOfBirth, race, email, location, completedStages);
   }
 
   @Override
@@ -290,7 +267,6 @@ public class User implements Serializable {
     StringBuilder sb = new StringBuilder();
     sb.append("class User {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    username: ").append(toIndentedString(username)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
     sb.append("    gender: ").append(toIndentedString(gender)).append("\n");

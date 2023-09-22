@@ -223,17 +223,17 @@ paths:
           description: Bad request
         "404":
           description: Not Found
-  /user/{username}:
+  /users/{email}:
     get:
       tags:
         - user
-      summary: Get user by user name
+      summary: Get user by email
       description: ""
-      operationId: getUserByName
+      operationId: getUserByEmail
       parameters:
-        - name: username
+        - name: email
           in: path
-          description: The name that needs to be fetched.
+          description: The user that needs to be fetched.
           required: true
           schema:
             type: string
@@ -245,7 +245,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
         "400":
-          description: Invalid username supplied
+          description: Invalid email supplied
         "404":
           description: User not found
     put:
@@ -255,7 +255,7 @@ paths:
       description: This can only be done by the logged in user.
       operationId: updateUser
       parameters:
-        - name: username
+        - name: email
           in: path
           description: name that need to be deleted
           required: true
@@ -277,7 +277,7 @@ paths:
       description: This can only be done by the logged in user.
       operationId: deleteUser
       parameters:
-        - name: username
+        - name: email
           in: path
           description: The name that needs to be deleted
           required: true
@@ -285,7 +285,7 @@ paths:
             type: string
       responses:
         "400":
-          description: Invalid username supplied
+          description: Invalid email supplied
         "404":
           description: User not found
   /elections/{electionId}/comments:
@@ -422,12 +422,15 @@ paths:
             schema:
               $ref: '#/components/schemas/Candidate'
       responses:
-        default:
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Candidate'
+        "400":
+          description: Invalid candidate supplied
+
   /candidates/{fistName}/{lastName}:
     get:
       tags:
@@ -484,12 +487,16 @@ paths:
             schema:
               $ref: '#/components/schemas/Candidate'
       responses:
-        default:
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Candidate'
+        "400":
+          description: Invalid candidate supplied
+        "404":
+          description: Candidate not found
 components:
   schemas:
     Location:
@@ -512,9 +519,6 @@ components:
           type: integer
           format: int64
           example: 10
-        username:
-          type: string
-          example: theUser
         firstName:
           type: string
           example: John

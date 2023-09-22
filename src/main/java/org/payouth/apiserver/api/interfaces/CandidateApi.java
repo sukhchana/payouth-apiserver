@@ -32,7 +32,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T10:25:30.542949600-04:00[America/New_York]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T10:47:57.186928900-04:00[America/New_York]")
 @Validated
 @Tag(name = "candidate", description = "Condidate profile")
 public interface CandidateApi {
@@ -43,6 +43,7 @@ public interface CandidateApi {
      *
      * @param candidate Created Candidate object (optional)
      * @return successful operation (status code 200)
+     *         or Invalid candidate supplied (status code 400)
      */
     @Operation(
         operationId = "createCandidate",
@@ -50,9 +51,10 @@ public interface CandidateApi {
         description = "Create a new Candidate.",
         tags = { "candidate" },
         responses = {
-            @ApiResponse(responseCode = "default", description = "successful operation", content = {
+            @ApiResponse(responseCode = "200", description = "successful operation", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = Candidate.class))
-            })
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid candidate supplied")
         }
     )
     @RequestMapping(
@@ -131,6 +133,8 @@ public interface CandidateApi {
      * @param lastName The last name of the candidate (required)
      * @param candidate update candidate object (optional)
      * @return successful operation (status code 200)
+     *         or Invalid candidate supplied (status code 400)
+     *         or Candidate not found (status code 404)
      */
     @Operation(
         operationId = "updateCandidate",
@@ -138,9 +142,11 @@ public interface CandidateApi {
         description = "update a new candidate.",
         tags = { "candidate" },
         responses = {
-            @ApiResponse(responseCode = "default", description = "successful operation", content = {
+            @ApiResponse(responseCode = "200", description = "successful operation", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = Candidate.class))
-            })
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid candidate supplied"),
+            @ApiResponse(responseCode = "404", description = "Candidate not found")
         }
     )
     @RequestMapping(
