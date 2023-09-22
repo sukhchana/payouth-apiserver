@@ -19,16 +19,13 @@ import java.util.Objects;
 
 @Schema(name = "Candidate", description = "Candidate profile")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T17:53:20.513631+01:00[Europe/London]")
-@DynamoDBTable(tableName = "candidates")
+@DynamoDBTable(tableName = "candidate")
 public class Candidate implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
   @DynamoDBHashKey
   private String id;
-
-  @DynamoDBAttribute
-  private Gender gender;
 
   @DynamoDBAttribute
   private String firstName;
@@ -76,25 +73,6 @@ public class Candidate implements Serializable {
     this.id = id;
   }
 
-  public Candidate gender(Gender gender) {
-    this.gender = gender;
-    return this;
-  }
-
-  /**
-   * Get gender
-   * @return gender
-  */
-  @Valid 
-  @Schema(name = "gender", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("gender")
-  public Gender getGender() {
-    return gender;
-  }
-
-  public void setGender(Gender gender) {
-    this.gender = gender;
-  }
 
   public Candidate firstName(String firstName) {
     this.firstName = firstName;
@@ -282,7 +260,6 @@ public class Candidate implements Serializable {
     }
     Candidate candidate = (Candidate) o;
     return Objects.equals(this.id, candidate.id) &&
-        Objects.equals(this.gender, candidate.gender) &&
         Objects.equals(this.firstName, candidate.firstName) &&
         Objects.equals(this.lastName, candidate.lastName) &&
         Objects.equals(this.picture, candidate.picture) &&
@@ -295,7 +272,7 @@ public class Candidate implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, gender, firstName, lastName, picture, party, pledges, policies, summary, incumbent);
+    return Objects.hash(id, firstName, lastName, picture, party, pledges, policies, summary, incumbent);
   }
 
   @Override
@@ -303,7 +280,6 @@ public class Candidate implements Serializable {
     StringBuilder sb = new StringBuilder();
     sb.append("class Candidate {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    gender: ").append(toIndentedString(gender)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
     sb.append("    picture: ").append(toIndentedString(picture)).append("\n");

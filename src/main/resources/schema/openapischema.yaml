@@ -668,8 +668,6 @@ components:
         id:
           type: string
           example: 1
-        gender:
-          $ref: '#/components/schemas/Gender'
         firstName:
           type: string
           example: John
