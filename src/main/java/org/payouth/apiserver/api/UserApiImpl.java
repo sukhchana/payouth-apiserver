@@ -1,14 +1,18 @@
 package org.payouth.apiserver.api;
 
+import lombok.AllArgsConstructor;
 import org.payouth.apiserver.api.interfaces.UserApi;
 import org.payouth.apiserver.model.User;
 import org.payouth.apiserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 @RestController
+@CrossOrigin()
+@AllArgsConstructor
 public class UserApiImpl implements UserApi {
     @Autowired
     private UserService service;
