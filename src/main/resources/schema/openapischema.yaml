@@ -37,163 +37,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                      example: 2023USA
-                    name:
-                      type: string
-                      example: 2023 USA Election
-                    details:
-                      type: string
-                      example: This election is to elect the president of USA 2023
-                    stages:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          id:
-                            type: string
-                            example: 1
-                          title:
-                            type: string
-                            examples:
-                              - Do you know the reason for the election?
-                              - Do you know what areas you want to focus the most?
-                              - Do you know the candidates for the election?
-                              - Do you know where to vote?
-                              - Are you registered to vote?
-                              - Do you know how to submit a postal vote?
-                              - Congrats you are ready to vote.
-                          elements:
-                            type: array
-                            items:
-                              type: object
-                              description: Generic Stage Elements that can be associated with various stages
-                              properties:
-                                id:
-                                  type: string
-                                  example: 1
-                                title:
-                                  type: string
-                                  description: This will be the title for each stage elements
-                                  examples:
-                                    - Background
-                                    - Healthcare
-                                    - John Doe
-                                picture:
-                                  type: string
-                                  description: base64 encoded image
-                                  examples:
-                                    - TE9M
-                                    - Uk9GTA==
-                                details:
-                                  type: string
-                                  description: Additional Description
-                                  examples:
-                                    - The persidential election happens every 5 years
-                                links:
-                                  type: array
-                                  items:
-                                    type: object
-                                    description: URLs with their metadata
-                                    properties:
-                                      id:
-                                        type: string
-                                        examples:
-                                          - 1
-                                          - 2
-                                      label:
-                                        type: string
-                                        examples:
-                                          - news
-                                      url:
-                                        type: string
-                                        examples:
-                                          - https://www.google.com
-                                frames:
-                                  type: array
-                                  items:
-                                    type: object
-                                    description: Frames are used for placeholder of other objects such as maps
-                                    properties:
-                                      id:
-                                        type: string
-                                        examples:
-                                          - 1
-                                          - 2
-                                      label:
-                                        type: string
-                                        examples:
-                                          - news
-                                      url:
-                                        type: string
-                                        examples:
-                                          - https://www.google.com
-                                comments:
-                                  type: array
-                                  items:
-                                    type: object
-                                    description: User comments
-                                    properties:
-                                      id:
-                                        type: string
-                                        examples:
-                                          - 1
-                                          - 2
-                                      username:
-                                        type: string
-                                        examples:
-                                          - AmazingVoter
-                                          - ResponsibleVoter
-                                      comment:
-                                        type: string
-                                        examples:
-                                          - This election will bring in a true difference
-                                          - I will vote
-                          comments:
-                            type: array
-                            items:
-                              type: object
-                              description: User comments
-                              properties:
-                                id:
-                                  type: string
-                                  examples:
-                                    - 1
-                                    - 2
-                                username:
-                                  type: string
-                                  examples:
-                                    - AmazingVoter
-                                    - ResponsibleVoter
-                                comment:
-                                  type: string
-                                  examples:
-                                    - This election will bring in a true difference
-                                    - I will vote
-                    comments:
-                      type: array
-                      items:
-                        type: object
-                        description: User comments
-                        properties:
-                          id:
-                            type: string
-                            examples:
-                              - 1
-                              - 2
-                          username:
-                            type: string
-                            examples:
-                              - AmazingVoter
-                              - ResponsibleVoter
-                          comment:
-                            type: string
-                            examples:
-                              - This election will bring in a true difference
-                              - I will vote
+                  $ref: '#/components/schemas/Election'
     post:
       tags:
         - election
@@ -205,326 +49,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                id:
-                  type: string
-                  example: 2023USA
-                name:
-                  type: string
-                  example: 2023 USA Election
-                details:
-                  type: string
-                  example: This election is to elect the president of USA 2023
-                stages:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        example: 1
-                      title:
-                        type: string
-                        examples:
-                          - Do you know the reason for the election?
-                          - Do you know what areas you want to focus the most?
-                          - Do you know the candidates for the election?
-                          - Do you know where to vote?
-                          - Are you registered to vote?
-                          - Do you know how to submit a postal vote?
-                          - Congrats you are ready to vote.
-                      elements:
-                        type: array
-                        items:
-                          type: object
-                          description: Generic Stage Elements that can be associated with various stages
-                          properties:
-                            id:
-                              type: string
-                              example: 1
-                            title:
-                              type: string
-                              description: This will be the title for each stage elements
-                              examples:
-                                - Background
-                                - Healthcare
-                                - John Doe
-                            picture:
-                              type: string
-                              description: base64 encoded image
-                              examples:
-                                - TE9M
-                                - Uk9GTA==
-                            details:
-                              type: string
-                              description: Additional Description
-                              examples:
-                                - The persidential election happens every 5 years
-                            links:
-                              type: array
-                              items:
-                                type: object
-                                description: URLs with their metadata
-                                properties:
-                                  id:
-                                    type: string
-                                    examples:
-                                      - 1
-                                      - 2
-                                  label:
-                                    type: string
-                                    examples:
-                                      - news
-                                  url:
-                                    type: string
-                                    examples:
-                                      - https://www.google.com
-                            frames:
-                              type: array
-                              items:
-                                type: object
-                                description: Frames are used for placeholder of other objects such as maps
-                                properties:
-                                  id:
-                                    type: string
-                                    examples:
-                                      - 1
-                                      - 2
-                                  label:
-                                    type: string
-                                    examples:
-                                      - news
-                                  url:
-                                    type: string
-                                    examples:
-                                      - https://www.google.com
-                            comments:
-                              type: array
-                              items:
-                                type: object
-                                description: User comments
-                                properties:
-                                  id:
-                                    type: string
-                                    examples:
-                                      - 1
-                                      - 2
-                                  username:
-                                    type: string
-                                    examples:
-                                      - AmazingVoter
-                                      - ResponsibleVoter
-                                  comment:
-                                    type: string
-                                    examples:
-                                      - This election will bring in a true difference
-                                      - I will vote
-                      comments:
-                        type: array
-                        items:
-                          type: object
-                          description: User comments
-                          properties:
-                            id:
-                              type: string
-                              examples:
-                                - 1
-                                - 2
-                            username:
-                              type: string
-                              examples:
-                                - AmazingVoter
-                                - ResponsibleVoter
-                            comment:
-                              type: string
-                              examples:
-                                - This election will bring in a true difference
-                                - I will vote
-                comments:
-                  type: array
-                  items:
-                    type: object
-                    description: User comments
-                    properties:
-                      id:
-                        type: string
-                        examples:
-                          - 1
-                          - 2
-                      username:
-                        type: string
-                        examples:
-                          - AmazingVoter
-                          - ResponsibleVoter
-                      comment:
-                        type: string
-                        examples:
-                          - This election will bring in a true difference
-                          - I will vote
+              $ref: '#/components/schemas/Election'
       responses:
         default:
           description: successful operation
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    example: 2023USA
-                  name:
-                    type: string
-                    example: 2023 USA Election
-                  details:
-                    type: string
-                    example: This election is to elect the president of USA 2023
-                  stages:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                          example: 1
-                        title:
-                          type: string
-                          examples:
-                            - Do you know the reason for the election?
-                            - Do you know what areas you want to focus the most?
-                            - Do you know the candidates for the election?
-                            - Do you know where to vote?
-                            - Are you registered to vote?
-                            - Do you know how to submit a postal vote?
-                            - Congrats you are ready to vote.
-                        elements:
-                          type: array
-                          items:
-                            type: object
-                            description: Generic Stage Elements that can be associated with various stages
-                            properties:
-                              id:
-                                type: string
-                                example: 1
-                              title:
-                                type: string
-                                description: This will be the title for each stage elements
-                                examples:
-                                  - Background
-                                  - Healthcare
-                                  - John Doe
-                              picture:
-                                type: string
-                                description: base64 encoded image
-                                examples:
-                                  - TE9M
-                                  - Uk9GTA==
-                              details:
-                                type: string
-                                description: Additional Description
-                                examples:
-                                  - The persidential election happens every 5 years
-                              links:
-                                type: array
-                                items:
-                                  type: object
-                                  description: URLs with their metadata
-                                  properties:
-                                    id:
-                                      type: string
-                                      examples:
-                                        - 1
-                                        - 2
-                                    label:
-                                      type: string
-                                      examples:
-                                        - news
-                                    url:
-                                      type: string
-                                      examples:
-                                        - https://www.google.com
-                              frames:
-                                type: array
-                                items:
-                                  type: object
-                                  description: Frames are used for placeholder of other objects such as maps
-                                  properties:
-                                    id:
-                                      type: string
-                                      examples:
-                                        - 1
-                                        - 2
-                                    label:
-                                      type: string
-                                      examples:
-                                        - news
-                                    url:
-                                      type: string
-                                      examples:
-                                        - https://www.google.com
-                              comments:
-                                type: array
-                                items:
-                                  type: object
-                                  description: User comments
-                                  properties:
-                                    id:
-                                      type: string
-                                      examples:
-                                        - 1
-                                        - 2
-                                    username:
-                                      type: string
-                                      examples:
-                                        - AmazingVoter
-                                        - ResponsibleVoter
-                                    comment:
-                                      type: string
-                                      examples:
-                                        - This election will bring in a true difference
-                                        - I will vote
-                        comments:
-                          type: array
-                          items:
-                            type: object
-                            description: User comments
-                            properties:
-                              id:
-                                type: string
-                                examples:
-                                  - 1
-                                  - 2
-                              username:
-                                type: string
-                                examples:
-                                  - AmazingVoter
-                                  - ResponsibleVoter
-                              comment:
-                                type: string
-                                examples:
-                                  - This election will bring in a true difference
-                                  - I will vote
-                  comments:
-                    type: array
-                    items:
-                      type: object
-                      description: User comments
-                      properties:
-                        id:
-                          type: string
-                          examples:
-                            - 1
-                            - 2
-                        username:
-                          type: string
-                          examples:
-                            - AmazingVoter
-                            - ResponsibleVoter
-                        comment:
-                          type: string
-                          examples:
-                            - This election will bring in a true difference
-                            - I will vote
+                $ref: '#/components/schemas/Election'
   /elections/{electionId}:
     get:
       tags:
@@ -544,163 +76,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    example: 2023USA
-                  name:
-                    type: string
-                    example: 2023 USA Election
-                  details:
-                    type: string
-                    example: This election is to elect the president of USA 2023
-                  stages:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                          example: 1
-                        title:
-                          type: string
-                          examples:
-                            - Do you know the reason for the election?
-                            - Do you know what areas you want to focus the most?
-                            - Do you know the candidates for the election?
-                            - Do you know where to vote?
-                            - Are you registered to vote?
-                            - Do you know how to submit a postal vote?
-                            - Congrats you are ready to vote.
-                        elements:
-                          type: array
-                          items:
-                            type: object
-                            description: Generic Stage Elements that can be associated with various stages
-                            properties:
-                              id:
-                                type: string
-                                example: 1
-                              title:
-                                type: string
-                                description: This will be the title for each stage elements
-                                examples:
-                                  - Background
-                                  - Healthcare
-                                  - John Doe
-                              picture:
-                                type: string
-                                description: base64 encoded image
-                                examples:
-                                  - TE9M
-                                  - Uk9GTA==
-                              details:
-                                type: string
-                                description: Additional Description
-                                examples:
-                                  - The persidential election happens every 5 years
-                              links:
-                                type: array
-                                items:
-                                  type: object
-                                  description: URLs with their metadata
-                                  properties:
-                                    id:
-                                      type: string
-                                      examples:
-                                        - 1
-                                        - 2
-                                    label:
-                                      type: string
-                                      examples:
-                                        - news
-                                    url:
-                                      type: string
-                                      examples:
-                                        - https://www.google.com
-                              frames:
-                                type: array
-                                items:
-                                  type: object
-                                  description: Frames are used for placeholder of other objects such as maps
-                                  properties:
-                                    id:
-                                      type: string
-                                      examples:
-                                        - 1
-                                        - 2
-                                    label:
-                                      type: string
-                                      examples:
-                                        - news
-                                    url:
-                                      type: string
-                                      examples:
-                                        - https://www.google.com
-                              comments:
-                                type: array
-                                items:
-                                  type: object
-                                  description: User comments
-                                  properties:
-                                    id:
-                                      type: string
-                                      examples:
-                                        - 1
-                                        - 2
-                                    username:
-                                      type: string
-                                      examples:
-                                        - AmazingVoter
-                                        - ResponsibleVoter
-                                    comment:
-                                      type: string
-                                      examples:
-                                        - This election will bring in a true difference
-                                        - I will vote
-                        comments:
-                          type: array
-                          items:
-                            type: object
-                            description: User comments
-                            properties:
-                              id:
-                                type: string
-                                examples:
-                                  - 1
-                                  - 2
-                              username:
-                                type: string
-                                examples:
-                                  - AmazingVoter
-                                  - ResponsibleVoter
-                              comment:
-                                type: string
-                                examples:
-                                  - This election will bring in a true difference
-                                  - I will vote
-                  comments:
-                    type: array
-                    items:
-                      type: object
-                      description: User comments
-                      properties:
-                        id:
-                          type: string
-                          examples:
-                            - 1
-                            - 2
-                        username:
-                          type: string
-                          examples:
-                            - AmazingVoter
-                            - ResponsibleVoter
-                        comment:
-                          type: string
-                          examples:
-                            - This election will bring in a true difference
-                            - I will vote
+                $ref: '#/components/schemas/Election'
     delete:
       tags:
         - election
@@ -738,128 +114,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    example: 1
-                  title:
-                    type: string
-                    examples:
-                      - Do you know the reason for the election?
-                      - Do you know what areas you want to focus the most?
-                      - Do you know the candidates for the election?
-                      - Do you know where to vote?
-                      - Are you registered to vote?
-                      - Do you know how to submit a postal vote?
-                      - Congrats you are ready to vote.
-                  elements:
-                    type: array
-                    items:
-                      type: object
-                      description: Generic Stage Elements that can be associated with various stages
-                      properties:
-                        id:
-                          type: string
-                          example: 1
-                        title:
-                          type: string
-                          description: This will be the title for each stage elements
-                          examples:
-                            - Background
-                            - Healthcare
-                            - John Doe
-                        picture:
-                          type: string
-                          description: base64 encoded image
-                          examples:
-                            - TE9M
-                            - Uk9GTA==
-                        details:
-                          type: string
-                          description: Additional Description
-                          examples:
-                            - The persidential election happens every 5 years
-                        links:
-                          type: array
-                          items:
-                            type: object
-                            description: URLs with their metadata
-                            properties:
-                              id:
-                                type: string
-                                examples:
-                                  - 1
-                                  - 2
-                              label:
-                                type: string
-                                examples:
-                                  - news
-                              url:
-                                type: string
-                                examples:
-                                  - https://www.google.com
-                        frames:
-                          type: array
-                          items:
-                            type: object
-                            description: Frames are used for placeholder of other objects such as maps
-                            properties:
-                              id:
-                                type: string
-                                examples:
-                                  - 1
-                                  - 2
-                              label:
-                                type: string
-                                examples:
-                                  - news
-                              url:
-                                type: string
-                                examples:
-                                  - https://www.google.com
-                        comments:
-                          type: array
-                          items:
-                            type: object
-                            description: User comments
-                            properties:
-                              id:
-                                type: string
-                                examples:
-                                  - 1
-                                  - 2
-                              username:
-                                type: string
-                                examples:
-                                  - AmazingVoter
-                                  - ResponsibleVoter
-                              comment:
-                                type: string
-                                examples:
-                                  - This election will bring in a true difference
-                                  - I will vote
-                  comments:
-                    type: array
-                    items:
-                      type: object
-                      description: User comments
-                      properties:
-                        id:
-                          type: string
-                          examples:
-                            - 1
-                            - 2
-                        username:
-                          type: string
-                          examples:
-                            - AmazingVoter
-                            - ResponsibleVoter
-                        comment:
-                          type: string
-                          examples:
-                            - This election will bring in a true difference
-                            - I will vote
+                type: array
+                items:
+                  $ref: '#/components/schemas/ElectionStage'
     post:
       tags:
         - stages
@@ -878,256 +135,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                id:
-                  type: string
-                  example: 1
-                title:
-                  type: string
-                  examples:
-                    - Do you know the reason for the election?
-                    - Do you know what areas you want to focus the most?
-                    - Do you know the candidates for the election?
-                    - Do you know where to vote?
-                    - Are you registered to vote?
-                    - Do you know how to submit a postal vote?
-                    - Congrats you are ready to vote.
-                elements:
-                  type: array
-                  items:
-                    type: object
-                    description: Generic Stage Elements that can be associated with various stages
-                    properties:
-                      id:
-                        type: string
-                        example: 1
-                      title:
-                        type: string
-                        description: This will be the title for each stage elements
-                        examples:
-                          - Background
-                          - Healthcare
-                          - John Doe
-                      picture:
-                        type: string
-                        description: base64 encoded image
-                        examples:
-                          - TE9M
-                          - Uk9GTA==
-                      details:
-                        type: string
-                        description: Additional Description
-                        examples:
-                          - The persidential election happens every 5 years
-                      links:
-                        type: array
-                        items:
-                          type: object
-                          description: URLs with their metadata
-                          properties:
-                            id:
-                              type: string
-                              examples:
-                                - 1
-                                - 2
-                            label:
-                              type: string
-                              examples:
-                                - news
-                            url:
-                              type: string
-                              examples:
-                                - https://www.google.com
-                      frames:
-                        type: array
-                        items:
-                          type: object
-                          description: Frames are used for placeholder of other objects such as maps
-                          properties:
-                            id:
-                              type: string
-                              examples:
-                                - 1
-                                - 2
-                            label:
-                              type: string
-                              examples:
-                                - news
-                            url:
-                              type: string
-                              examples:
-                                - https://www.google.com
-                      comments:
-                        type: array
-                        items:
-                          type: object
-                          description: User comments
-                          properties:
-                            id:
-                              type: string
-                              examples:
-                                - 1
-                                - 2
-                            username:
-                              type: string
-                              examples:
-                                - AmazingVoter
-                                - ResponsibleVoter
-                            comment:
-                              type: string
-                              examples:
-                                - This election will bring in a true difference
-                                - I will vote
-                comments:
-                  type: array
-                  items:
-                    type: object
-                    description: User comments
-                    properties:
-                      id:
-                        type: string
-                        examples:
-                          - 1
-                          - 2
-                      username:
-                        type: string
-                        examples:
-                          - AmazingVoter
-                          - ResponsibleVoter
-                      comment:
-                        type: string
-                        examples:
-                          - This election will bring in a true difference
-                          - I will vote
+              $ref: '#/components/schemas/ElectionStage'
       responses:
         default:
           description: successful operation
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    example: 1
-                  title:
-                    type: string
-                    examples:
-                      - Do you know the reason for the election?
-                      - Do you know what areas you want to focus the most?
-                      - Do you know the candidates for the election?
-                      - Do you know where to vote?
-                      - Are you registered to vote?
-                      - Do you know how to submit a postal vote?
-                      - Congrats you are ready to vote.
-                  elements:
-                    type: array
-                    items:
-                      type: object
-                      description: Generic Stage Elements that can be associated with various stages
-                      properties:
-                        id:
-                          type: string
-                          example: 1
-                        title:
-                          type: string
-                          description: This will be the title for each stage elements
-                          examples:
-                            - Background
-                            - Healthcare
-                            - John Doe
-                        picture:
-                          type: string
-                          description: base64 encoded image
-                          examples:
-                            - TE9M
-                            - Uk9GTA==
-                        details:
-                          type: string
-                          description: Additional Description
-                          examples:
-                            - The persidential election happens every 5 years
-                        links:
-                          type: array
-                          items:
-                            type: object
-                            description: URLs with their metadata
-                            properties:
-                              id:
-                                type: string
-                                examples:
-                                  - 1
-                                  - 2
-                              label:
-                                type: string
-                                examples:
-                                  - news
-                              url:
-                                type: string
-                                examples:
-                                  - https://www.google.com
-                        frames:
-                          type: array
-                          items:
-                            type: object
-                            description: Frames are used for placeholder of other objects such as maps
-                            properties:
-                              id:
-                                type: string
-                                examples:
-                                  - 1
-                                  - 2
-                              label:
-                                type: string
-                                examples:
-                                  - news
-                              url:
-                                type: string
-                                examples:
-                                  - https://www.google.com
-                        comments:
-                          type: array
-                          items:
-                            type: object
-                            description: User comments
-                            properties:
-                              id:
-                                type: string
-                                examples:
-                                  - 1
-                                  - 2
-                              username:
-                                type: string
-                                examples:
-                                  - AmazingVoter
-                                  - ResponsibleVoter
-                              comment:
-                                type: string
-                                examples:
-                                  - This election will bring in a true difference
-                                  - I will vote
-                  comments:
-                    type: array
-                    items:
-                      type: object
-                      description: User comments
-                      properties:
-                        id:
-                          type: string
-                          examples:
-                            - 1
-                            - 2
-                        username:
-                          type: string
-                          examples:
-                            - AmazingVoter
-                            - ResponsibleVoter
-                        comment:
-                          type: string
-                          examples:
-                            - This election will bring in a true difference
-                            - I will vote
+                $ref: '#/components/schemas/ElectionStage'
   /elections/{electionId}/stages/{stageId}:
     delete:
       tags:
@@ -1153,7 +168,7 @@ paths:
           description: Invalid Id supplied
         "404":
           description: Id not found
-  /user:
+  /users:
     post:
       tags:
         - user
@@ -1165,72 +180,45 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                id:
-                  type: integer
-                  format: int64
-                  example: 10
-                username:
-                  type: string
-                  example: theUser
-                firstName:
-                  type: string
-                  example: John
-                lastName:
-                  type: string
-                  example: James
-                email:
-                  type: string
-                  example: john@email.com
-                location:
-                  type: object
-                  properties:
-                    longitude:
-                      type: string
-                    latitude:
-                      type: string
-                completedStages:
-                  type: array
-                  description: The stage ids the user have completed
-                  items:
-                    type: string
+              $ref: '#/components/schemas/User'
       responses:
-        default:
+        "200":
           description: successful operation
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                    example: 10
-                  username:
-                    type: string
-                    example: theUser
-                  firstName:
-                    type: string
-                    example: John
-                  lastName:
-                    type: string
-                    example: James
-                  email:
-                    type: string
-                    example: john@email.com
-                  location:
-                    type: object
-                    properties:
-                      longitude:
-                        type: string
-                      latitude:
-                        type: string
-                  completedStages:
-                    type: array
-                    description: The stage ids the user have completed
-                    items:
-                      type: string
+                $ref: '#/components/schemas/User'
+    get:
+      tags:
+        - user
+      summary: Filter users
+      operationId: filterUsers
+      description: Retrieve a list of users based on filter criteria.
+      parameters:
+        - name: birthYear
+          in: query
+          description: Filter users by birth year.
+          schema:
+            type: integer
+        - name: gender
+          in: query
+          description: Filter users by gender.
+          schema:
+            type: string
+            enum: [ 'male', 'female', 'other' ]
+        responses:
+          "200":
+            description: Successful response
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/User'
+          "400":
+            description: Bad request
+          "404":
+            description: Not Found
   /user/{username}:
     get:
       tags:
@@ -1251,36 +239,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    format: int64
-                    example: 10
-                  username:
-                    type: string
-                    example: theUser
-                  firstName:
-                    type: string
-                    example: John
-                  lastName:
-                    type: string
-                    example: James
-                  email:
-                    type: string
-                    example: john@email.com
-                  location:
-                    type: object
-                    properties:
-                      longitude:
-                        type: string
-                      latitude:
-                        type: string
-                  completedStages:
-                    type: array
-                    description: The stage ids the user have completed
-                    items:
-                      type: string
+                $ref: '#/components/schemas/User'
         "400":
           description: Invalid username supplied
         "404":
@@ -1303,36 +262,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                id:
-                  type: integer
-                  format: int64
-                  example: 10
-                username:
-                  type: string
-                  example: theUser
-                firstName:
-                  type: string
-                  example: John
-                lastName:
-                  type: string
-                  example: James
-                email:
-                  type: string
-                  example: john@email.com
-                location:
-                  type: object
-                  properties:
-                    longitude:
-                      type: string
-                    latitude:
-                      type: string
-                completedStages:
-                  type: array
-                  description: The stage ids the user have completed
-                  items:
-                    type: string
+              $ref: '#/components/schemas/User'
       responses:
         default:
           description: successful operation
@@ -1379,6 +309,15 @@ components:
         lastName:
           type: string
           example: James
+        gender:
+          type: string
+          enum:
+            - male
+            - female
+            - other
+        dateOfBirth:
+          type: string
+          example: 01/01/1990
         email:
           type: string
           example: john@email.com
@@ -1409,149 +348,7 @@ components:
         stages:
           type: array
           items:
-            type: object
-            properties:
-              id:
-                type: string
-                example: 1
-              title:
-                type: string
-                examples:
-                  - Do you know the reason for the election?
-                  - Do you know what areas you want to focus the most?
-                  - Do you know the candidates for the election?
-                  - Do you know where to vote?
-                  - Are you registered to vote?
-                  - Do you know how to submit a postal vote?
-                  - Congrats you are ready to vote.
-              elements:
-                type: array
-                items:
-                  type: object
-                  description: Generic Stage Elements that can be associated with various stages
-                  properties:
-                    id:
-                      type: string
-                      example: 1
-                    title:
-                      type: string
-                      description: This will be the title for each stage elements
-                      examples:
-                        - Background
-                        - Healthcare
-                        - John Doe
-                    picture:
-                      type: string
-                      description: base64 encoded image
-                      examples:
-                        - TE9M
-                        - Uk9GTA==
-                    details:
-                      type: string
-                      description: Additional Description
-                      examples:
-                        - The persidential election happens every 5 years
-                    links:
-                      type: array
-                      items:
-                        type: object
-                        description: URLs with their metadata
-                        properties:
-                          id:
-                            type: string
-                            examples:
-                              - 1
-                              - 2
-                          label:
-                            type: string
-                            examples:
-                              - news
-                          url:
-                            type: string
-                            examples:
-                              - https://www.google.com
-                    frames:
-                      type: array
-                      items:
-                        type: object
-                        description: Frames are used for placeholder of other objects such as maps
-                        properties:
-                          id:
-                            type: string
-                            examples:
-                              - 1
-                              - 2
-                          label:
-                            type: string
-                            examples:
-                              - news
-                          url:
-                            type: string
-                            examples:
-                              - https://www.google.com
-                    comments:
-                      type: array
-                      items:
-                        type: object
-                        description: User comments
-                        properties:
-                          id:
-                            type: string
-                            examples:
-                              - 1
-                              - 2
-                          username:
-                            type: string
-                            examples:
-                              - AmazingVoter
-                              - ResponsibleVoter
-                          comment:
-                            type: string
-                            examples:
-                              - This election will bring in a true difference
-                              - I will vote
-              comments:
-                type: array
-                items:
-                  type: object
-                  description: User comments
-                  properties:
-                    id:
-                      type: string
-                      examples:
-                        - 1
-                        - 2
-                    username:
-                      type: string
-                      examples:
-                        - AmazingVoter
-                        - ResponsibleVoter
-                    comment:
-                      type: string
-                      examples:
-                        - This election will bring in a true difference
-                        - I will vote
-        comments:
-          type: array
-          items:
-            type: object
-            description: User comments
-            properties:
-              id:
-                type: string
-                examples:
-                  - 1
-                  - 2
-              username:
-                type: string
-                examples:
-                  - AmazingVoter
-                  - ResponsibleVoter
-              comment:
-                type: string
-                examples:
-                  - This election will bring in a true difference
-                  - I will vote
+            $ref: '#/components/schemas/ElectionStage'
     ElectionStage:
       type: object
       properties:
@@ -1571,110 +368,7 @@ components:
         elements:
           type: array
           items:
-            type: object
-            description: Generic Stage Elements that can be associated with various stages
-            properties:
-              id:
-                type: string
-                example: 1
-              title:
-                type: string
-                description: This will be the title for each stage elements
-                examples:
-                  - Background
-                  - Healthcare
-                  - John Doe
-              picture:
-                type: string
-                description: base64 encoded image
-                examples:
-                  - TE9M
-                  - Uk9GTA==
-              details:
-                type: string
-                description: Additional Description
-                examples:
-                  - The persidential election happens every 5 years
-              links:
-                type: array
-                items:
-                  type: object
-                  description: URLs with their metadata
-                  properties:
-                    id:
-                      type: string
-                      examples:
-                        - 1
-                        - 2
-                    label:
-                      type: string
-                      examples:
-                        - news
-                    url:
-                      type: string
-                      examples:
-                        - https://www.google.com
-              frames:
-                type: array
-                items:
-                  type: object
-                  description: Frames are used for placeholder of other objects such as maps
-                  properties:
-                    id:
-                      type: string
-                      examples:
-                        - 1
-                        - 2
-                    label:
-                      type: string
-                      examples:
-                        - news
-                    url:
-                      type: string
-                      examples:
-                        - https://www.google.com
-              comments:
-                type: array
-                items:
-                  type: object
-                  description: User comments
-                  properties:
-                    id:
-                      type: string
-                      examples:
-                        - 1
-                        - 2
-                    username:
-                      type: string
-                      examples:
-                        - AmazingVoter
-                        - ResponsibleVoter
-                    comment:
-                      type: string
-                      examples:
-                        - This election will bring in a true difference
-                        - I will vote
-        comments:
-          type: array
-          items:
-            type: object
-            description: User comments
-            properties:
-              id:
-                type: string
-                examples:
-                  - 1
-                  - 2
-              username:
-                type: string
-                examples:
-                  - AmazingVoter
-                  - ResponsibleVoter
-              comment:
-                type: string
-                examples:
-                  - This election will bring in a true difference
-                  - I will vote
+            $ref: '#/components/schemas/ElectionStageElement'
     ElectionStageElement:
       type: object
       description: Generic Stage Elements that can be associated with various stages
@@ -1703,62 +397,15 @@ components:
         links:
           type: array
           items:
-            type: object
-            description: URLs with their metadata
-            properties:
-              id:
-                type: string
-                examples:
-                  - 1
-                  - 2
-              label:
-                type: string
-                examples:
-                  - news
-              url:
-                type: string
-                examples:
-                  - https://www.google.com
+            $ref: '#/components/schemas/Link'
         frames:
           type: array
           items:
-            type: object
-            description: Frames are used for placeholder of other objects such as maps
-            properties:
-              id:
-                type: string
-                examples:
-                  - 1
-                  - 2
-              label:
-                type: string
-                examples:
-                  - news
-              url:
-                type: string
-                examples:
-                  - https://www.google.com
+            $ref: '#/components/schemas/Frame'
         comments:
           type: array
           items:
-            type: object
-            description: User comments
-            properties:
-              id:
-                type: string
-                examples:
-                  - 1
-                  - 2
-              username:
-                type: string
-                examples:
-                  - AmazingVoter
-                  - ResponsibleVoter
-              comment:
-                type: string
-                examples:
-                  - This election will bring in a true difference
-                  - I will vote
+            $ref: '#/components/schemas/Comment'
     Link:
       type: object
       description: URLs with their metadata
