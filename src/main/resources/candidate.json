@@ -3,7 +3,6 @@
     "id": "1",
     "firstName": "John",
     "lastName": "Smith",
-    "gender": "male",
     "party": "Democratic",
     "picture": "s3://pa-youth-candidate/candidate_7.jpg",
     "summary": "Democratic",
@@ -35,7 +34,6 @@
       "Strong National Defense",
       "Tax Reform"
     ],
-    "gender": "female",
     "summary": "Republican challenger",
     "incumbent": false
   }
