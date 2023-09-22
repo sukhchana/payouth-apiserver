@@ -2,12 +2,20 @@ package org.payouth.apiserver.model;
 
 import java.net.URI;
 import java.util.Objects;
+
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.payouth.apiserver.model.Gender;
 import org.payouth.apiserver.model.UserLocation;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -26,48 +34,33 @@ import javax.annotation.Generated;
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T10:47:57.186928900-04:00[America/New_York]")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@DynamoDBTable(tableName = "user")
 public class User implements Serializable {
 
   private static final long serialVersionUID = 1L;
-
-  private Long id;
-
+  @DynamoDBAttribute
   private String firstName;
-
+  @DynamoDBAttribute
   private String lastName;
-
+  @DynamoDBAttribute
   private Gender gender;
-
+  @DynamoDBAttribute
   private String dateOfBirth;
-
+  @DynamoDBAttribute
   private String race;
-
+  @DynamoDBHashKey
   private String email;
-
+  @DynamoDBAttribute
   private UserLocation location;
 
   @Valid
-  private List<String> completedStages;
+  @DynamoDBAttribute
+  private List<String> completedStages = new ArrayList<>();
 
-  public User id(Long id) {
-    this.id = id;
-    return this;
-  }
 
-  /**
-   * Get id
-   * @return id
-  */
-  
-  @Schema(name = "id", example = "10", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("id")
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
 
   public User firstName(String firstName) {
     this.firstName = firstName;
@@ -246,7 +239,7 @@ public class User implements Serializable {
       return false;
     }
     User user = (User) o;
-    return Objects.equals(this.id, user.id) &&
+    return Objects.equals(this.email, user.email) &&
         Objects.equals(this.firstName, user.firstName) &&
         Objects.equals(this.lastName, user.lastName) &&
         Objects.equals(this.gender, user.gender) &&
@@ -259,14 +252,13 @@ public class User implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, lastName, gender, dateOfBirth, race, email, location, completedStages);
+    return Objects.hash(firstName, lastName, gender, dateOfBirth, race, email, location, completedStages);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class User {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
     sb.append("    gender: ").append(toIndentedString(gender)).append("\n");
