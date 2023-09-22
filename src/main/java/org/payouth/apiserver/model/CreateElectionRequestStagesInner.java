@@ -30,7 +30,7 @@ public class CreateElectionRequestStagesInner implements Serializable {
   @Valid
   private List<@Valid ElectionStageElement> elements;
 
-  private JsonNullable<Object> comments = JsonNullable.<Object>undefined();
+  private List<Comment> comments;
 
   public CreateElectionRequestStagesInner id(String id) {
     this.id = id;
@@ -100,8 +100,8 @@ public class CreateElectionRequestStagesInner implements Serializable {
     this.elements = elements;
   }
 
-  public CreateElectionRequestStagesInner comments(Object comments) {
-    this.comments = JsonNullable.of(comments);
+  public CreateElectionRequestStagesInner comments(List<Comment> comments) {
+    this.comments = comments;
     return this;
   }
 
@@ -112,11 +112,11 @@ public class CreateElectionRequestStagesInner implements Serializable {
   
   @Schema(name = "comments", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("comments")
-  public JsonNullable<Object> getComments() {
+  public List<Comment> getComments() {
     return comments;
   }
 
-  public void setComments(JsonNullable<Object> comments) {
+  public void setComments(List<Comment> comments) {
     this.comments = comments;
   }
 
@@ -132,7 +132,7 @@ public class CreateElectionRequestStagesInner implements Serializable {
     return Objects.equals(this.id, createElectionRequestStagesInner.id) &&
         Objects.equals(this.title, createElectionRequestStagesInner.title) &&
         Objects.equals(this.elements, createElectionRequestStagesInner.elements) &&
-        equalsNullable(this.comments, createElectionRequestStagesInner.comments);
+            Objects.equals(this.comments, createElectionRequestStagesInner.comments);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -141,7 +141,7 @@ public class CreateElectionRequestStagesInner implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, title, elements, hashCodeNullable(comments));
+    return Objects.hash(id, title, elements, comments);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {

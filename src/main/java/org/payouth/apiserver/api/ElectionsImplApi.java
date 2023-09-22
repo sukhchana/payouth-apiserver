@@ -1,7 +1,8 @@
 package org.payouth.apiserver.api;
 
+import lombok.AllArgsConstructor;
 import org.payouth.apiserver.api.interfaces.ElectionsApi;
-import org.payouth.apiserver.model.CreateElectionRequest;
+import org.payouth.apiserver.service.InMemoryService;
 import org.payouth.apiserver.model.CreateElectionRequestStagesInner;
 import org.payouth.apiserver.model.Election;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 public class ElectionsImplApi implements ElectionsApi {
+
+    private InMemoryService electionsCache;
+
     /**
      * POST /elections : Create Election
      * Create a new Election.
@@ -19,8 +24,8 @@ public class ElectionsImplApi implements ElectionsApi {
      * @return successful operation (status code 200)
      */
     @Override
-    public ResponseEntity<CreateElectionRequest> createElection(CreateElectionRequest createElectionRequest) {
-        return null;
+    public ResponseEntity<Election> createElection(Election createElectionRequest) {
+        return ResponseEntity.ok(electionsCache.createElection(createElectionRequest));
     }
 
     /**
@@ -46,7 +51,8 @@ public class ElectionsImplApi implements ElectionsApi {
      */
     @Override
     public ResponseEntity<Void> deleteElection(String electionId) {
-        return null;
+        electionsCache.deleteElection(electionId);
+        return ResponseEntity.noContent().build();
     }
 
     /**
@@ -70,8 +76,9 @@ public class ElectionsImplApi implements ElectionsApi {
      * @return successful operation (status code 200)
      */
     @Override
-    public ResponseEntity<CreateElectionRequest> getElectionById(String electionId) {
-        return null;
+    public ResponseEntity<Election> getElectionById(String electionId) {
+        var election = electionsCache.getElection(electionId);
+        return election.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     /**
@@ -92,6 +99,6 @@ public class ElectionsImplApi implements ElectionsApi {
      */
     @Override
     public ResponseEntity<List<Election>> getElections() {
-        return null;
+        return ResponseEntity.ok(electionsCache.getElections());
     }
 }
