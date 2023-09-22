@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 
 @Schema(name = "Link", description = "URLs with their metadata")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T04:13:42.442585+01:00[Europe/London]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T04:31:09.763985+01:00[Europe/London]")
 public class Link implements Serializable {
 
   private static final long serialVersionUID = 1L;

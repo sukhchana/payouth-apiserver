@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 
 @Schema(name = "ElectionStageElement", description = "Generic Stage Elements that can be associated with various stages")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T04:13:42.442585+01:00[Europe/London]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T04:31:09.763985+01:00[Europe/London]")
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class ElectionStageElement implements Serializable {
 
@@ -35,9 +35,6 @@ public class ElectionStageElement implements Serializable {
 
   @Valid
   private List<@Valid Frame> frames;
-
-  @Valid
-  private List<@Valid Comment> comments;
 
   public ElectionStageElement id(String id) {
     this.id = id;
@@ -175,34 +172,6 @@ public class ElectionStageElement implements Serializable {
     this.frames = frames;
   }
 
-  public ElectionStageElement comments(List<@Valid Comment> comments) {
-    this.comments = comments;
-    return this;
-  }
-
-  public ElectionStageElement addCommentsItem(Comment commentsItem) {
-    if (this.comments == null) {
-      this.comments = new ArrayList<>();
-    }
-    this.comments.add(commentsItem);
-    return this;
-  }
-
-  /**
-   * Get comments
-   * @return comments
-  */
-  @Valid 
-  @Schema(name = "comments", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("comments")
-  public List<@Valid Comment> getComments() {
-    return comments;
-  }
-
-  public void setComments(List<@Valid Comment> comments) {
-    this.comments = comments;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -217,13 +186,12 @@ public class ElectionStageElement implements Serializable {
         Objects.equals(this.picture, electionStageElement.picture) &&
         Objects.equals(this.details, electionStageElement.details) &&
         Objects.equals(this.links, electionStageElement.links) &&
-        Objects.equals(this.frames, electionStageElement.frames) &&
-        Objects.equals(this.comments, electionStageElement.comments);
+        Objects.equals(this.frames, electionStageElement.frames);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, title, picture, details, links, frames, comments);
+    return Objects.hash(id, title, picture, details, links, frames);
   }
 
   @Override
@@ -236,7 +204,6 @@ public class ElectionStageElement implements Serializable {
     sb.append("    details: ").append(toIndentedString(details)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("    frames: ").append(toIndentedString(frames)).append("\n");
-    sb.append("    comments: ").append(toIndentedString(comments)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -8,6 +8,7 @@ package org.payouth.apiserver.api.interfaces;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -15,18 +16,45 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.payouth.apiserver.model.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Generated;
 import javax.validation.Valid;
+import java.util.List;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T04:13:42.442585+01:00[Europe/London]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T04:47:51.835270+01:00[Europe/London]")
 @Validated
 @Tag(name = "user", description = "Operations about user")
 public interface UserApi {
+
+    /**
+     * POST /users : Create user
+     * Create a new user.
+     *
+     * @param user Created user object (optional)
+     * @return successful operation (status code 200)
+     */
+    @Operation(
+        operationId = "createUser",
+        summary = "Create user",
+        description = "Create a new user.",
+        tags = { "user" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "successful operation", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))
+            })
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.POST,
+        value = "/users",
+        produces = { "application/json" },
+        consumes = { "application/json" }
+    )
+    ResponseEntity<User> createUser(
+        @Parameter(name = "User", description = "Created user object") @Valid @RequestBody(required = false) User user
+    );
+
 
     /**
      * DELETE /user/{username} : Delete user
@@ -52,6 +80,40 @@ public interface UserApi {
     )
     ResponseEntity<Void> deleteUser(
         @Parameter(name = "username", description = "The name that needs to be deleted", required = true, in = ParameterIn.PATH) @PathVariable("username") String username
+    );
+
+
+    /**
+     * GET /users : Filter users
+     * Retrieve a list of users based on filter criteria.
+     *
+     * @param birthYear Filter users by birth year. (optional)
+     * @param gender Filter users by gender. (optional)
+     * @return Successful response (status code 200)
+     *         or Bad request (status code 400)
+     *         or Not Found (status code 404)
+     */
+    @Operation(
+        operationId = "filterUsers",
+        summary = "Filter users",
+        description = "Retrieve a list of users based on filter criteria.",
+        tags = { "user" },
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Successful response", content = {
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = User.class)))
+            }),
+            @ApiResponse(responseCode = "400", description = "Bad request"),
+            @ApiResponse(responseCode = "404", description = "Not Found")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/users",
+        produces = { "application/json" }
+    )
+    ResponseEntity<List<User>> filterUsers(
+        @Parameter(name = "birthYear", description = "Filter users by birth year.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "birthYear", required = false) Integer birthYear,
+        @Parameter(name = "gender", description = "Filter users by gender.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "gender", required = false) String gender
     );
 
 

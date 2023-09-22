@@ -19,7 +19,9 @@ tags:
   - name: election
     description: Election
   - name: stages
-    description: Stages
+    description: Stages in the Election
+  - name: comments
+    description: Add/View comments
   - name: user
     description: Operations about user
 paths:
@@ -284,6 +286,113 @@ paths:
           description: Invalid username supplied
         "404":
           description: User not found
+  /elections/{electionId}/comments:
+    post:
+      tags:
+        - comments
+      summary: Add a new comment for Election
+      operationId: postCommentInElection
+      parameters:
+        - name: electionId
+          in: path
+          description: Election ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Comment to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+    get:
+      tags:
+        - comments
+      summary: Get all comment for Election
+      operationId: getAllCommentsInElection
+      parameters:
+        - name: electionId
+          in: path
+          description: Election ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+  /elections/{electionId}/stages/{stageId}/comments:
+    post:
+      tags:
+        - comments
+      summary: Add a new comment for Stage
+      operationId: postCommentInStage
+      parameters:
+        - name: electionId
+          in: path
+          description: Election ID
+          required: true
+          schema:
+            type: string
+        - name: stageId
+          in: path
+          description: Election ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Comment to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+    get:
+      tags:
+        - comments
+      summary: Get all comment for Stage
+      operationId: getAllCommentsInStage
+      parameters:
+        - name: electionId
+          in: path
+          description: Election ID
+          required: true
+          schema:
+            type: string
+        - name: stageId
+          in: path
+          description: Election ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+
 components:
   schemas:
     Location:
@@ -349,6 +458,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ElectionStage'
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
     ElectionStage:
       type: object
       properties:
@@ -369,6 +482,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ElectionStageElement'
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
     ElectionStageElement:
       type: object
       description: Generic Stage Elements that can be associated with various stages
@@ -402,10 +519,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Frame'
-        comments:
-          type: array
-          items:
-            $ref: '#/components/schemas/Comment'
     Link:
       type: object
       description: URLs with their metadata
