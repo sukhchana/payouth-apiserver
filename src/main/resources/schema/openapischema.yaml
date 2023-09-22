@@ -192,37 +192,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-    get:
-      tags:
-        - user
-      summary: Filter users
-      operationId: filterUsers
-      description: Retrieve a list of users based on filter criteria.
-      parameters:
-        - name: birthYear
-          in: query
-          description: Filter users by birth year.
-          schema:
-            type: integer
-        - name: gender
-          in: query
-          description: Filter users by gender.
-          schema:
-            type: string
-            enum: [ 'male', 'female', 'other' ]
-      responses:
-        "200":
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'
-        "400":
-          description: Bad request
-        "404":
-          description: Not Found
   /users/{email}:
     get:
       tags:
