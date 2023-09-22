@@ -15,11 +15,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class InMemoryService {
+public class ElectionsInMemoryService {
     private List<Election> elections;
     private final ObjectMapper objectMapper;
 
-    public InMemoryService() throws IOException {
+    public ElectionsInMemoryService() throws IOException {
         objectMapper = new ObjectMapper();
         elections = objectMapper.readValue(new File("src/main/resources/data.json"), new TypeReference<List<Election>>(){});
     }

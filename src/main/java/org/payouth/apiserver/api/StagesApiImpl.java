@@ -3,7 +3,7 @@ package org.payouth.apiserver.api;
 import lombok.AllArgsConstructor;
 import org.payouth.apiserver.api.interfaces.StagesApi;
 import org.payouth.apiserver.model.ElectionStage;
-import org.payouth.apiserver.service.InMemoryService;
+import org.payouth.apiserver.service.ElectionsInMemoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +16,7 @@ import java.util.List;
 @CrossOrigin()
 public class StagesApiImpl implements StagesApi {
 
-    private InMemoryService electionsCache;
+    private ElectionsInMemoryService electionsCache;
 
 
     /**

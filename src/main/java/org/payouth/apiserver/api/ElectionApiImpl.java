@@ -3,7 +3,7 @@ package org.payouth.apiserver.api;
 import lombok.AllArgsConstructor;
 import org.payouth.apiserver.api.interfaces.ElectionApi;
 import org.payouth.apiserver.model.Election;
-import org.payouth.apiserver.service.InMemoryService;
+import org.payouth.apiserver.service.ElectionsInMemoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +15,7 @@ import java.util.List;
 @CrossOrigin()
 public class ElectionApiImpl implements ElectionApi {
 
-    private InMemoryService electionsCache;
+    private ElectionsInMemoryService electionsCache;
 
     /**
      * POST /elections : Create Election
