@@ -1,14 +1,13 @@
 package org.payouth.apiserver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 import javax.annotation.Generated;
 import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,7 +15,8 @@ import java.util.Objects;
  * Election
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-21T23:36:10.667381+01:00[Europe/London]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T04:13:42.442585+01:00[Europe/London]")
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Election implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -29,8 +29,6 @@ public class Election implements Serializable {
 
   @Valid
   private List<@Valid ElectionStage> stages;
-
-  private List<Comment>  comments;
 
   public Election id(String id) {
     this.id = id;
@@ -120,26 +118,6 @@ public class Election implements Serializable {
     this.stages = stages;
   }
 
-  public Election comments(List<Comment>  comments) {
-    this.comments = comments;
-    return this;
-  }
-
-  /**
-   * Get comments
-   * @return comments
-  */
-  
-  @Schema(name = "comments", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("comments")
-  public List<Comment>  getComments() {
-    return comments;
-  }
-
-  public void setComments(List<Comment>  comments) {
-    this.comments = comments;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -152,24 +130,12 @@ public class Election implements Serializable {
     return Objects.equals(this.id, election.id) &&
         Objects.equals(this.name, election.name) &&
         Objects.equals(this.details, election.details) &&
-        Objects.equals(this.stages, election.stages) &&
-        Objects.equals(this.comments, election.comments);
-  }
-
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+        Objects.equals(this.stages, election.stages);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, details, stages, comments);
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
+    return Objects.hash(id, name, details, stages);
   }
 
   @Override
@@ -180,7 +146,6 @@ public class Election implements Serializable {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    details: ").append(toIndentedString(details)).append("\n");
     sb.append("    stages: ").append(toIndentedString(stages)).append("\n");
-    sb.append("    comments: ").append(toIndentedString(comments)).append("\n");
     sb.append("}");
     return sb.toString();
   }

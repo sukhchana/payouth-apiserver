@@ -11,7 +11,7 @@ import java.util.Objects;
  * Location
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-21T23:36:10.667381+01:00[Europe/London]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T04:13:42.442585+01:00[Europe/London]")
 public class Location implements Serializable {
 
   private static final long serialVersionUID = 1L;
