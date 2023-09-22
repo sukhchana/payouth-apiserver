@@ -24,7 +24,7 @@ tags:
     description: Add/View comments
   - name: user
     description: Operations about user
-  - name: condicate
+  - name: candidate
     description: Condidate profile
 paths:
   /elections:
@@ -395,51 +395,28 @@ paths:
                 items:
                   $ref: '#/components/schemas/Comment'
   /candidates:
-      tags:
-        - candidate
     get:
-      summary: Retrieve a list of candidates.
-      responses:
-        '200':
-          description: OK
-
-    post:
       tags:
         - candidate
-      summary: Create a new candidate
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Candidate'
+      summary: Returns list of elections
+      operationId: getCandidates
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Candidate'
-
-  /candidates/{firstName}{lastName}:
-    put:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Candidate'
+    post:
       tags:
         - candidate
-      summary: Update candidate
-      operationId: updateUser
-      parameters:
-        - name: firstName
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: lastName
-          in: path
-          required: true
-          schema:
-            type: string
+      summary: Create Candidate
+      description: Create a new Candidate.
+      operationId: createCandidate
       requestBody:
-        description: Update an existent condidate
+        description: Created Candidate object
         content:
           application/json:
             schema:
@@ -447,7 +424,72 @@ paths:
       responses:
         default:
           description: successful operation
-
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Candidate'
+  /candidates/{fistName}/{lastName}:
+    get:
+      tags:
+        - candidate
+      summary: Returns a specific candidate
+      operationId: getCandidateByNameNadLatName
+      parameters:
+        - name: fistName
+          in: path
+          description:  The first name of the candidate
+          required: true
+          schema:
+            type: string
+        - name: lastName
+          in: path
+          description: The last name of the candidate
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Candidate'
+        "400":
+          description: Invalid candidate supplied
+        "404":
+          description: Candidate not found
+    put:
+      tags:
+        - candidate
+      summary: update candidate
+      description: update a new candidate.
+      operationId: updateCandidate
+      parameters:
+        - name: fistName
+          in: path
+          description: The first name of the candidate
+          required: true
+          schema:
+            type: string
+        - name: lastName
+          in: path
+          description: The last name of the candidate
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: update candidate object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Candidate'
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Candidate'
 components:
   schemas:
     Location:
@@ -633,37 +675,40 @@ components:
             - I will vote
 
     PoliticalParty:
-     type: string
-     enum:
-      - Democratic
-      - Republican
-      - Green
-      - Constitution
-      - Independent
-      - Socialist
-      - Communist
-      - Liberal
-      - Reform
+      type: string
+      enum:
+        - Democratic
+        - Republican
+        - Green
+        - Constitution
+        - Independent
+        - Socialist
+        - Communist
+        - Liberal
+        - Reform
 
     Candidate:
       type: object
       description: Candidate profile
-      gender:
-        $ref: '#/components/schemas/Gender'
-      firstName:
-        type: string
-        example: John
-      lastName:
-        type: string
-        example: James
-      picture:
-        type: string
-      party:
-        $ref: '#/components/schemas/PoliticalParty'
-      pledges:
-        type: array
+      properties:
+        gender:
+          $ref: '#/components/schemas/Gender'
+        firstName:
           type: string
-        description: list  summaries of public statements made by the candidate in speeche
+          example: John
+        lastName:
+          type: string
+          example: James
+        picture:
+          type: string
+        party:
+          $ref: '#/components/schemas/PoliticalParty'
+        pledges:
+          type: array
+          items:
+            type: string
+          description: list  summaries of public statements made by the candidate in speeche
+
 
 
 
