@@ -1,0 +1,43 @@
+[
+  {
+    "id": "1",
+    "firstName": "John",
+    "lastName": "Smith",
+    "gender": "male",
+    "party": "Democratic",
+    "picture": "s3://pa-youth-candidate/candidate_7.jpg",
+    "summary": "Democratic",
+    "pledges": [
+      "Reduce Income Inequality",
+      "Criminal Justice Reform",
+      "Infrastructure Investment"
+    ],
+    "incumbent": true,
+    "policies": [
+      "Universal Healthcare",
+      "Climate Change Action",
+      "Higher Education Access"
+    ]
+  },
+  {
+    "id": "2",
+    "firstName": "Jennifer",
+    "lastName": "Brown",
+    "party": "Republican",
+    "picture": "s3://pa-youth-candidate/candidate_5.jpg",
+    "pledges": [
+      "Border Security",
+      "Second Amendment Rights",
+      "Pro-Life Stance"
+    ],
+    "policies": [
+      "Economic Deregulation",
+      "Strong National Defense",
+      "Tax Reform"
+    ],
+    "gender": "female",
+    "summary": "Republican challenger",
+    "incumbent": false
+  }
+
+]

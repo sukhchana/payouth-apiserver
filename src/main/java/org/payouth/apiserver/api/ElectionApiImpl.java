@@ -64,6 +64,5 @@ public class ElectionApiImpl implements ElectionApi {
     @Override
     public ResponseEntity<List<Election>> getElections() {
         return ResponseEntity.ok(electionsService.getElections());
-        //return ResponseEntity.ok(electionsCache.getElections());
     }
 }
