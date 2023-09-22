@@ -25,7 +25,7 @@ tags:
   - name: user
     description: Operations about user
   - name: candidate
-    description: Condidate profile
+    description: Candidate profile
 paths:
   /elections:
     get:
@@ -431,22 +431,16 @@ paths:
         "400":
           description: Invalid candidate supplied
 
-  /candidates/{fistName}/{lastName}:
+  /candidates/{candidateId}:
     get:
       tags:
         - candidate
       summary: Returns a specific candidate
-      operationId: getCandidateByNameNadLatName
+      operationId: getCandidateById
       parameters:
-        - name: fistName
+        - name: candidateId
           in: path
-          description:  The first name of the candidate
-          required: true
-          schema:
-            type: string
-        - name: lastName
-          in: path
-          description: The last name of the candidate
+          description:  CandidateId
           required: true
           schema:
             type: string
@@ -468,15 +462,9 @@ paths:
       description: update a new candidate.
       operationId: updateCandidate
       parameters:
-        - name: fistName
+        - name: candidateId
           in: path
-          description: The first name of the candidate
-          required: true
-          schema:
-            type: string
-        - name: lastName
-          in: path
-          description: The last name of the candidate
+          description:  CandidateId
           required: true
           schema:
             type: string
@@ -695,6 +683,9 @@ components:
       type: object
       description: Candidate profile
       properties:
+        id:
+          type: string
+          example: 1
         gender:
           $ref: '#/components/schemas/Gender'
         firstName:
@@ -711,7 +702,16 @@ components:
           type: array
           items:
             type: string
-          description: list  summaries of public statements made by the candidate in speeche
+          description: list  summaries of public statements made by the candidate in speeches
+        policies:
+          type: array
+          items:
+            type: string
+          description: list  summaries of policies made by the candidate in speeches
+        summary:
+          type: string
+        incumbent:
+          type: boolean
 
 
 

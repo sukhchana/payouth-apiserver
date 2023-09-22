@@ -32,9 +32,9 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T10:47:57.186928900-04:00[America/New_York]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T17:53:20.513631+01:00[Europe/London]")
 @Validated
-@Tag(name = "candidate", description = "Condidate profile")
+@Tag(name = "candidate", description = "Candidate profile")
 public interface CandidateApi {
 
     /**
@@ -69,16 +69,15 @@ public interface CandidateApi {
 
 
     /**
-     * GET /candidates/{fistName}/{lastName} : Returns a specific candidate
+     * GET /candidates/{candidateId} : Returns a specific candidate
      *
-     * @param fistName The first name of the candidate (required)
-     * @param lastName The last name of the candidate (required)
+     * @param candidateId CandidateId (required)
      * @return successful operation (status code 200)
      *         or Invalid candidate supplied (status code 400)
      *         or Candidate not found (status code 404)
      */
     @Operation(
-        operationId = "getCandidateByNameNadLatName",
+        operationId = "getCandidateById",
         summary = "Returns a specific candidate",
         tags = { "candidate" },
         responses = {
@@ -91,12 +90,11 @@ public interface CandidateApi {
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/candidates/{fistName}/{lastName}",
+        value = "/candidates/{candidateId}",
         produces = { "application/json" }
     )
-    ResponseEntity<Candidate> getCandidateByNameNadLatName(
-        @Parameter(name = "fistName", description = "The first name of the candidate", required = true, in = ParameterIn.PATH) @PathVariable("fistName") String fistName,
-        @Parameter(name = "lastName", description = "The last name of the candidate", required = true, in = ParameterIn.PATH) @PathVariable("lastName") String lastName
+    ResponseEntity<Candidate> getCandidateById(
+        @Parameter(name = "candidateId", description = "CandidateId", required = true, in = ParameterIn.PATH) @PathVariable("candidateId") String candidateId
     );
 
 
@@ -126,11 +124,10 @@ public interface CandidateApi {
 
 
     /**
-     * PUT /candidates/{fistName}/{lastName} : update candidate
+     * PUT /candidates/{candidateId} : update candidate
      * update a new candidate.
      *
-     * @param fistName The first name of the candidate (required)
-     * @param lastName The last name of the candidate (required)
+     * @param candidateId CandidateId (required)
      * @param candidate update candidate object (optional)
      * @return successful operation (status code 200)
      *         or Invalid candidate supplied (status code 400)
@@ -151,13 +148,12 @@ public interface CandidateApi {
     )
     @RequestMapping(
         method = RequestMethod.PUT,
-        value = "/candidates/{fistName}/{lastName}",
+        value = "/candidates/{candidateId}",
         produces = { "application/json" },
         consumes = { "application/json" }
     )
     ResponseEntity<Candidate> updateCandidate(
-        @Parameter(name = "fistName", description = "The first name of the candidate", required = true, in = ParameterIn.PATH) @PathVariable("fistName") String fistName,
-        @Parameter(name = "lastName", description = "The last name of the candidate", required = true, in = ParameterIn.PATH) @PathVariable("lastName") String lastName,
+        @Parameter(name = "candidateId", description = "CandidateId", required = true, in = ParameterIn.PATH) @PathVariable("candidateId") String candidateId,
         @Parameter(name = "Candidate", description = "update candidate object") @Valid @RequestBody(required = false) Candidate candidate
     );
 
