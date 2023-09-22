@@ -24,6 +24,8 @@ tags:
     description: Add/View comments
   - name: user
     description: Operations about user
+  - name: condicate
+    description: Condidate profile
 paths:
   /elections:
     get:
@@ -392,6 +394,59 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Comment'
+  /candidates:
+      tags:
+        - candidate
+    get:
+      summary: Retrieve a list of candidates.
+      responses:
+        '200':
+          description: OK
+
+    post:
+      tags:
+        - candidate
+      summary: Create a new candidate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Candidate'
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Candidate'
+
+  /candidates/{firstName}{lastName}:
+    put:
+      tags:
+        - candidate
+      summary: Update candidate
+      operationId: updateUser
+      parameters:
+        - name: firstName
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: lastName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Update an existent condidate
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Candidate'
+      responses:
+        default:
+          description: successful operation
 
 components:
   schemas:
@@ -402,6 +457,12 @@ components:
           type: string
         latitude:
           type: string
+    Gender:
+      type: string
+      enum:
+        - male
+        - female
+        - other
     User:
       type: object
       properties:
@@ -419,14 +480,12 @@ components:
           type: string
           example: James
         gender:
-          type: string
-          enum:
-            - male
-            - female
-            - other
+          $ref: '#/components/schemas/Gender'
         dateOfBirth:
           type: string
           example: 01/01/1990
+        race:
+          type: string
         email:
           type: string
           example: john@email.com
@@ -572,3 +631,40 @@ components:
           examples:
             - This election will bring in a true difference
             - I will vote
+
+    PoliticalParty:
+     type: string
+     enum:
+      - Democratic
+      - Republican
+      - Green
+      - Constitution
+      - Independent
+      - Socialist
+      - Communist
+      - Liberal
+      - Reform
+
+    Candidate:
+      type: object
+      description: Candidate profile
+      gender:
+        $ref: '#/components/schemas/Gender'
+      firstName:
+        type: string
+        example: John
+      lastName:
+        type: string
+        example: James
+      picture:
+        type: string
+      party:
+        $ref: '#/components/schemas/PoliticalParty'
+      pledges:
+        type: array
+          type: string
+        description: list  summaries of public statements made by the candidate in speeche
+
+
+
+
