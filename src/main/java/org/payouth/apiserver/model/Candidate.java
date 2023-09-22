@@ -1,10 +1,10 @@
 package org.payouth.apiserver.model;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.annotation.Generated;
 import javax.validation.Valid;
@@ -20,6 +20,8 @@ import java.util.Objects;
 @Schema(name = "Candidate", description = "Candidate profile")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T17:53:20.513631+01:00[Europe/London]")
 @DynamoDBTable(tableName = "candidate")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Candidate implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -37,14 +39,15 @@ public class Candidate implements Serializable {
   private String picture;
 
   @DynamoDBAttribute
-  private PoliticalParty party;
+  private String party;
 
   @Valid
-  @DynamoDBAttribute
+  @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.SS)
+  @DynamoDBTypeConverted(converter = SetToList.class)
   private List<String> pledges;
 
   @Valid
-  @DynamoDBAttribute
+  @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.SS)
   private List<String> policies;
 
   @DynamoDBAttribute
@@ -134,7 +137,7 @@ public class Candidate implements Serializable {
     this.picture = picture;
   }
 
-  public Candidate party(PoliticalParty party) {
+  public Candidate party(String party) {
     this.party = party;
     return this;
   }
@@ -146,11 +149,11 @@ public class Candidate implements Serializable {
   @Valid 
   @Schema(name = "party", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("party")
-  public PoliticalParty getParty() {
+  public String getParty() {
     return party;
   }
 
-  public void setParty(PoliticalParty party) {
+  public void setParty(String party) {
     this.party = party;
   }
 

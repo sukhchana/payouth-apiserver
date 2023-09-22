@@ -3,7 +3,7 @@ package org.payouth.apiserver.api;
 import lombok.AllArgsConstructor;
 import org.payouth.apiserver.api.interfaces.CandidateApi;
 import org.payouth.apiserver.model.Candidate;
-import org.payouth.apiserver.service.CandidateService;
+import org.payouth.apiserver.service.CandidateDBService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CandidateApiImpl implements CandidateApi {
 
-    private CandidateService candidateService;
+    private CandidateDBService candidateService;
     @Override
     public ResponseEntity<Candidate> createCandidate(Candidate candidate) {
         return ResponseEntity.ok(candidateService.addCandidate(candidate));
