@@ -1,12 +1,14 @@
 package org.payouth.apiserver.config;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Home redirection to OpenAPI api documentation
  */
 @Controller
+@CrossOrigin()
 public class HomeController {
 
     @RequestMapping("/")

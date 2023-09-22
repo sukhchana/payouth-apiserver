@@ -5,13 +5,15 @@ import org.payouth.apiserver.api.interfaces.ElectionApi;
 import org.payouth.apiserver.model.Election;
 import org.payouth.apiserver.service.InMemoryService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
 @AllArgsConstructor
-public class ElectionlApiImpl implements ElectionApi {
+@CrossOrigin()
+public class ElectionApiImpl implements ElectionApi {
 
     private InMemoryService electionsCache;
 

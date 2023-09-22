@@ -5,6 +5,7 @@ import org.payouth.apiserver.api.interfaces.CommentsApi;
 import org.payouth.apiserver.model.Comment;
 import org.payouth.apiserver.service.InMemoryService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import org.webjars.NotFoundException;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin()
 public class CommentApiImpl implements CommentsApi {
     private InMemoryService electionsCache;
 

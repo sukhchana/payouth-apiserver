@@ -12,10 +12,7 @@ import lombok.AllArgsConstructor;
 import org.payouth.apiserver.model.Election;
 import org.payouth.apiserver.service.InMemoryService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -23,6 +20,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @Tag(name = "json", description = "APIs to read/put raw json data")
+@CrossOrigin()
 public class JsonService {
 
     private InMemoryService electionsCache;
