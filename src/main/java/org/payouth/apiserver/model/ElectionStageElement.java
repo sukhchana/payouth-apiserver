@@ -25,7 +25,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "ElectionStageElement", description = "Generic Stage Elements that can be associated with various stages")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T09:45:13.422270400-04:00[America/New_York]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T10:25:30.542949600-04:00[America/New_York]")
 public class ElectionStageElement implements Serializable {
 
   private static final long serialVersionUID = 1L;

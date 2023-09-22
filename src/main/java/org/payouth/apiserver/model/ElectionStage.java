@@ -24,7 +24,7 @@ import javax.annotation.Generated;
  * ElectionStage
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T09:45:13.422270400-04:00[America/New_York]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T10:25:30.542949600-04:00[America/New_York]")
 public class ElectionStage implements Serializable {
 
   private static final long serialVersionUID = 1L;
