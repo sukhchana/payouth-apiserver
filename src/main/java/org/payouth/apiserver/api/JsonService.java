@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.payouth.apiserver.model.Election;
+import org.payouth.apiserver.service.ElectionsDBService;
 import org.payouth.apiserver.service.ElectionsInMemoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ import java.util.List;
 @CrossOrigin()
 public class JsonService {
 
-    private ElectionsInMemoryService electionsCache;
+    private ElectionsDBService electionsService;
 
     /**
      * POST /json : Add raw election data as json
@@ -50,7 +51,8 @@ public class JsonService {
     )
     ResponseEntity<List<Election>> addFromJson(
             @Parameter(name = "jsonInput", description = " Raw Json") @Valid @RequestBody(required = true) String jsonInput) throws JsonProcessingException {
-        return ResponseEntity.ok(electionsCache.loadFromJson(jsonInput));
+       return ResponseEntity.ok(electionsService.loadFromJson(jsonInput));
+        //return ResponseEntity.ok(electionsCache.loadFromJson(jsonInput));
     }
 
 
@@ -75,7 +77,7 @@ public class JsonService {
             produces = { "application/json" }
     )
     ResponseEntity<String> getElections() throws JsonProcessingException {
-        return ResponseEntity.ok(electionsCache.getElectionsAsJson());
+        return ResponseEntity.ok(electionsService.getElectionsAsJson());
     }
 
 

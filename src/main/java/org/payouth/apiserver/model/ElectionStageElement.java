@@ -1,47 +1,48 @@
 package org.payouth.apiserver.model;
 
-import java.net.URI;
-import java.util.Objects;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.payouth.apiserver.model.Frame;
-import org.payouth.apiserver.model.Link;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.io.Serializable;
-import java.time.OffsetDateTime;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-
-import java.util.*;
 import javax.annotation.Generated;
+import javax.validation.Valid;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Generic Stage Elements that can be associated with various stages
  */
 
 @Schema(name = "ElectionStageElement", description = "Generic Stage Elements that can be associated with various stages")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T10:47:57.186928900-04:00[America/New_York]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T04:31:09.763985+01:00[Europe/London]")
+@JsonIgnoreProperties(ignoreUnknown=true)
+@DynamoDBDocument
 public class ElectionStageElement implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
+  @DynamoDBAttribute
   private String id;
 
+  @DynamoDBAttribute
   private String title;
 
+  @DynamoDBAttribute
   private String picture;
 
+  @DynamoDBAttribute
   private String details;
 
   @Valid
+  @DynamoDBAttribute
   private List<@Valid Link> links;
 
   @Valid
+  @DynamoDBAttribute
   private List<@Valid Frame> frames;
 
   public ElectionStageElement id(String id) {

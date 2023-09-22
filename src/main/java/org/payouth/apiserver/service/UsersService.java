@@ -7,14 +7,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UsersService implements UsersApi {
+public class UsersService {
 
-    @Override
+
     public ResponseEntity<User> createUser(User user) {
         return null;
     }
 
-    @Override
     public ResponseEntity<List<User>> filterUsers(Integer birthYear, String gender) {
         return null;
     }
