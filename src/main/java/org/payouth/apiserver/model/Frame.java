@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 
 @Schema(name = "Frame", description = "Frames are used for placeholder of other objects such as maps")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-21T23:36:10.667381+01:00[Europe/London]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T04:13:42.442585+01:00[Europe/London]")
 public class Frame implements Serializable {
 
   private static final long serialVersionUID = 1L;

@@ -26,7 +26,7 @@ import javax.annotation.Generated;
 import javax.validation.Valid;
 import java.util.List;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-21T23:36:10.667381+01:00[Europe/London]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T04:13:42.442585+01:00[Europe/London]")
 @Validated
 @Tag(name = "election", description = "Election")
 public interface ElectionsApi {
@@ -35,7 +35,7 @@ public interface ElectionsApi {
      * POST /elections : Create Election
      * Create a new Election.
      *
-     * @param createElectionRequest Created Election object (optional)
+     * @param election Created Election object (optional)
      * @return successful operation (status code 200)
      */
     @Operation(
@@ -56,7 +56,7 @@ public interface ElectionsApi {
         consumes = { "application/json" }
     )
     ResponseEntity<Election> createElection(
-        @Parameter(name = "CreateElectionRequest", description = "Created Election object") @Valid @RequestBody(required = false) Election createElectionRequest
+        @Parameter(name = "Election", description = "Created Election object") @Valid @RequestBody(required = false) Election election
     );
 
 
@@ -65,7 +65,7 @@ public interface ElectionsApi {
      * Create a new Election Stage.
      *
      * @param electionId Election ID (required)
-     * @param createElectionStageRequest Created Election object (optional)
+     * @param electionStage Created Election object (optional)
      * @return successful operation (status code 200)
      */
     @Operation(
@@ -87,7 +87,7 @@ public interface ElectionsApi {
     )
     ResponseEntity<ElectionStage> createElectionStage(
         @Parameter(name = "electionId", description = "Election ID", required = true, in = ParameterIn.PATH) @PathVariable("electionId") String electionId,
-        @Parameter(name = "createElectionStageRequest", description = "Created Election object") @Valid @RequestBody(required = false) ElectionStage createElectionStageRequest
+        @Parameter(name = "ElectionStage", description = "Created Election object") @Valid @RequestBody(required = false) ElectionStage electionStage
     );
 
 

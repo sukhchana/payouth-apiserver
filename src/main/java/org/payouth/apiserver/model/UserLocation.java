@@ -9,12 +9,12 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * CreateUserRequestLocation
+ * UserLocation
  */
 
-@JsonTypeName("createUser_request_location")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-21T23:36:10.667381+01:00[Europe/London]")
-public class CreateUserRequestLocation implements Serializable {
+@JsonTypeName("User_location")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T04:13:42.442585+01:00[Europe/London]")
+public class UserLocation implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,7 @@ public class CreateUserRequestLocation implements Serializable {
 
   private String latitude;
 
-  public CreateUserRequestLocation longitude(String longitude) {
+  public UserLocation longitude(String longitude) {
     this.longitude = longitude;
     return this;
   }
@@ -42,7 +42,7 @@ public class CreateUserRequestLocation implements Serializable {
     this.longitude = longitude;
   }
 
-  public CreateUserRequestLocation latitude(String latitude) {
+  public UserLocation latitude(String latitude) {
     this.latitude = latitude;
     return this;
   }
@@ -70,9 +70,9 @@ public class CreateUserRequestLocation implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CreateUserRequestLocation createUserRequestLocation = (CreateUserRequestLocation) o;
-    return Objects.equals(this.longitude, createUserRequestLocation.longitude) &&
-        Objects.equals(this.latitude, createUserRequestLocation.latitude);
+    UserLocation userLocation = (UserLocation) o;
+    return Objects.equals(this.longitude, userLocation.longitude) &&
+        Objects.equals(this.latitude, userLocation.latitude);
   }
 
   @Override
@@ -83,7 +83,7 @@ public class CreateUserRequestLocation implements Serializable {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CreateUserRequestLocation {\n");
+    sb.append("class UserLocation {\n");
     sb.append("    longitude: ").append(toIndentedString(longitude)).append("\n");
     sb.append("    latitude: ").append(toIndentedString(latitude)).append("\n");
     sb.append("}");

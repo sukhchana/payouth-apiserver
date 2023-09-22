@@ -12,7 +12,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.payouth.apiserver.model.CreateUserRequest;
+import org.payouth.apiserver.model.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,39 +23,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.annotation.Generated;
 import javax.validation.Valid;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-21T23:36:10.667381+01:00[Europe/London]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T04:13:42.442585+01:00[Europe/London]")
 @Validated
 @Tag(name = "user", description = "Operations about user")
 public interface UserApi {
-
-    /**
-     * POST /user : Create user
-     * Create a new user.
-     *
-     * @param createUserRequest Created user object (optional)
-     * @return successful operation (status code 200)
-     */
-    @Operation(
-        operationId = "createUser",
-        summary = "Create user",
-        description = "Create a new user.",
-        tags = { "user" },
-        responses = {
-            @ApiResponse(responseCode = "default", description = "successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateUserRequest.class))
-            })
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/user",
-        produces = { "application/json" },
-        consumes = { "application/json" }
-    )
-    ResponseEntity<CreateUserRequest> createUser(
-        @Parameter(name = "CreateUserRequest", description = "Created user object") @Valid @RequestBody(required = false) CreateUserRequest createUserRequest
-    );
-
 
     /**
      * DELETE /user/{username} : Delete user
@@ -100,7 +71,7 @@ public interface UserApi {
         tags = { "user" },
         responses = {
             @ApiResponse(responseCode = "200", description = "successful operation", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateUserRequest.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))
             }),
             @ApiResponse(responseCode = "400", description = "Invalid username supplied"),
             @ApiResponse(responseCode = "404", description = "User not found")
@@ -111,7 +82,7 @@ public interface UserApi {
         value = "/user/{username}",
         produces = { "application/json" }
     )
-    ResponseEntity<CreateUserRequest> getUserByName(
+    ResponseEntity<User> getUserByName(
         @Parameter(name = "username", description = "The name that needs to be fetched.", required = true, in = ParameterIn.PATH) @PathVariable("username") String username
     );
 
@@ -121,7 +92,7 @@ public interface UserApi {
      * This can only be done by the logged in user.
      *
      * @param username name that need to be deleted (required)
-     * @param createUserRequest Update an existent user in the store (optional)
+     * @param user Update an existent user in the store (optional)
      * @return successful operation (status code 200)
      */
     @Operation(
@@ -140,7 +111,7 @@ public interface UserApi {
     )
     ResponseEntity<Void> updateUser(
         @Parameter(name = "username", description = "name that need to be deleted", required = true, in = ParameterIn.PATH) @PathVariable("username") String username,
-        @Parameter(name = "CreateUserRequest", description = "Update an existent user in the store") @Valid @RequestBody(required = false) CreateUserRequest createUserRequest
+        @Parameter(name = "User", description = "Update an existent user in the store") @Valid @RequestBody(required = false) User user
     );
 
 }
