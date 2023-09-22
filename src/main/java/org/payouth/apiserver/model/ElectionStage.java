@@ -1,5 +1,7 @@
 package org.payouth.apiserver.model;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -17,18 +19,24 @@ import java.util.Objects;
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T04:31:09.763985+01:00[Europe/London]")
 @JsonIgnoreProperties(ignoreUnknown=true)
+@DynamoDBDocument
 public class ElectionStage implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
+
+  @DynamoDBAttribute
   private String id;
 
+  @DynamoDBAttribute
   private String title;
 
   @Valid
+  @DynamoDBAttribute
   private List<@Valid ElectionStageElement> elements;
 
   @Valid
+  @DynamoDBAttribute
   private List<@Valid Comment> comments;
 
   public ElectionStage id(String id) {

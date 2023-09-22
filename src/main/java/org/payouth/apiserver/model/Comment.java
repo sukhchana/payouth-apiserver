@@ -1,5 +1,8 @@
 package org.payouth.apiserver.model;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -13,14 +16,17 @@ import java.util.Objects;
 
 @Schema(name = "Comment", description = "User comments")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T04:31:09.763985+01:00[Europe/London]")
+@DynamoDBDocument
 public class Comment implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
+  @DynamoDBAttribute
   private String id;
 
+  @DynamoDBAttribute
   private String username;
-
+  @DynamoDBAttribute
   private String comment;
 
   public Comment id(String id) {

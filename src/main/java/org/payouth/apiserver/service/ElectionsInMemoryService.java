@@ -7,7 +7,6 @@ import org.payouth.apiserver.model.Comment;
 import org.payouth.apiserver.model.Election;
 import org.payouth.apiserver.model.ElectionStage;
 import org.springframework.stereotype.Service;
-import org.webjars.NotFoundException;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ElectionsInMemoryService {
+public class ElectionsInMemoryService implements ElectionService {
     private List<Election> elections;
     private final ObjectMapper objectMapper;
 
@@ -50,35 +49,13 @@ public class ElectionsInMemoryService {
         elections.removeIf(election -> election.getId().equals(electionId));
     }
 
-    public List<ElectionStage> getElectionStages(String electionId) {
-        return getElection(electionId)
-                .orElseThrow(() -> new NotFoundException("electionId="+electionId+" is not found."))
-                .getStages();
-    }
-
-    public Optional<ElectionStage> getElectionStage(String electionId, String stageId) {
-        return getElectionStages(electionId).stream().filter(stage -> stage.getId().equals(stageId)).findAny();
+    public void deleteElectionStage(String electionId, String stageId) {
+        getElectionStages(electionId).removeIf(electionStage -> electionStage.getId().equals(stageId));
     }
 
     public ElectionStage createElectionStage(String electionId, ElectionStage electionStage) {
         getElectionStages(electionId).add(electionStage);
         return electionStage;
-    }
-
-    public void deleteElectionStage(String electionId, String stageId) {
-        getElectionStages(electionId).removeIf(electionStage -> electionStage.getId().equals(stageId));
-    }
-
-    public List<Comment> getAllCommentsInElection(String electionId) {
-        return getElection(electionId)
-                .orElseThrow(() -> new NotFoundException("electionId="+electionId+" is not found."))
-                .getComments();
-    }
-
-    public List<Comment> getAllCommentsInStage(String electionId, String stageId) {
-        return getElectionStage(electionId,stageId)
-                .orElseThrow(() -> new NotFoundException("stageId="+stageId+" and electionId="+electionId+" is not found."))
-                .getComments();
     }
 
     public Comment postCommentInElection(String electionId, Comment comment) {

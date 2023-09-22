@@ -3,7 +3,7 @@ package org.payouth.apiserver.api;
 import lombok.AllArgsConstructor;
 import org.payouth.apiserver.api.interfaces.ElectionApi;
 import org.payouth.apiserver.model.Election;
-import org.payouth.apiserver.service.ElectionsInMemoryService;
+import org.payouth.apiserver.service.ElectionsDBService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
 @CrossOrigin()
+@AllArgsConstructor
 public class ElectionApiImpl implements ElectionApi {
 
-    private ElectionsInMemoryService electionsCache;
+    private ElectionsDBService electionsService;
+
 
     /**
      * POST /elections : Create Election
@@ -26,7 +27,7 @@ public class ElectionApiImpl implements ElectionApi {
      */
     @Override
     public ResponseEntity<Election> createElection(Election createElectionRequest) {
-        return ResponseEntity.ok(electionsCache.createElection(createElectionRequest));
+        return ResponseEntity.ok(electionsService.createElection(createElectionRequest));
     }
 
     /**
@@ -39,7 +40,7 @@ public class ElectionApiImpl implements ElectionApi {
      */
     @Override
     public ResponseEntity<Void> deleteElection(String electionId) {
-        electionsCache.deleteElection(electionId);
+        electionsService.deleteElection(electionId);
         return ResponseEntity.noContent().build();
     }
 
@@ -51,7 +52,7 @@ public class ElectionApiImpl implements ElectionApi {
      */
     @Override
     public ResponseEntity<Election> getElectionById(String electionId) {
-        var election = electionsCache.getElection(electionId);
+        var election = electionsService.getElection(electionId);
         return election.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -62,6 +63,7 @@ public class ElectionApiImpl implements ElectionApi {
      */
     @Override
     public ResponseEntity<List<Election>> getElections() {
-        return ResponseEntity.ok(electionsCache.getElections());
+        return ResponseEntity.ok(electionsService.getElections());
+        //return ResponseEntity.ok(electionsCache.getElections());
     }
 }

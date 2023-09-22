@@ -3,7 +3,7 @@ package org.payouth.apiserver.api;
 import lombok.AllArgsConstructor;
 import org.payouth.apiserver.api.interfaces.StagesApi;
 import org.payouth.apiserver.model.ElectionStage;
-import org.payouth.apiserver.service.ElectionsInMemoryService;
+import org.payouth.apiserver.service.ElectionsDBService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +16,7 @@ import java.util.List;
 @CrossOrigin()
 public class StagesApiImpl implements StagesApi {
 
-    private ElectionsInMemoryService electionsCache;
+    private ElectionsDBService electionsService;
 
 
     /**
@@ -30,7 +30,7 @@ public class StagesApiImpl implements StagesApi {
     @Override
     public ResponseEntity<ElectionStage> createElectionStage(String electionId, ElectionStage createElectionStagesRequest) {
         try {
-            return ResponseEntity.ok(electionsCache.createElectionStage(electionId, createElectionStagesRequest));
+            return ResponseEntity.ok(electionsService.createElectionStage(electionId, createElectionStagesRequest));
         }
         catch (NotFoundException e) {
             return ResponseEntity.notFound().build();
@@ -49,7 +49,7 @@ public class StagesApiImpl implements StagesApi {
     @Override
     public ResponseEntity<Void> deleteElectionStage(String electionId, String stageId) {
         try {
-            electionsCache.deleteElectionStage(electionId, stageId);
+            electionsService.deleteElectionStage(electionId, stageId);
             return ResponseEntity.ok().build();
         }
         catch (NotFoundException e) {
@@ -65,7 +65,7 @@ public class StagesApiImpl implements StagesApi {
     @Override
     public ResponseEntity<List<ElectionStage>> getElectionStages(String electionId) {
         try {
-            return ResponseEntity.ok(electionsCache.getElectionStages(electionId));
+            return ResponseEntity.ok(electionsService.getElectionStages(electionId));
         }
         catch (NotFoundException e) {
             return ResponseEntity.notFound().build();
