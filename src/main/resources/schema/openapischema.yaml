@@ -531,18 +531,9 @@ components:
         email:
           type: string
           example: john@email.com
-        location:
-          type: object
-          properties:
-            longitude:
-              type: string
-            latitude:
-              type: string
-        completedStages:
-          type: array
-          description: The stage ids the user have completed
-          items:
+        county:
             type: string
+
 
     Election:
       type: object
