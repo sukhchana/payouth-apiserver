@@ -2,6 +2,7 @@ package org.payouth.apiserver.model;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIgnore;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -26,18 +27,25 @@ import java.util.Objects;
 public class User implements Serializable {
 
   private static final long serialVersionUID = 1L;
+
   @DynamoDBHashKey
   private String email;
+
   @DynamoDBAttribute
   private String firstName;
+
   @DynamoDBAttribute
   private String lastName;
+
   @DynamoDBAttribute
-  private Gender gender;
+  private String gender;
+
   @DynamoDBAttribute
   private String dateOfBirth;
+
   @DynamoDBAttribute
   private String race;
+
   @DynamoDBAttribute
   private String county;
 
@@ -81,7 +89,7 @@ public class User implements Serializable {
     this.lastName = lastName;
   }
 
-  public User gender(Gender gender) {
+  public User gender(String gender) {
     this.gender = gender;
     return this;
   }
@@ -93,11 +101,11 @@ public class User implements Serializable {
   @Valid
   @Schema(name = "gender", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("gender")
-  public Gender getGender() {
+  public String getGender() {
     return gender;
   }
 
-  public void setGender(Gender gender) {
+  public void setGender(String gender) {
     this.gender = gender;
   }
 

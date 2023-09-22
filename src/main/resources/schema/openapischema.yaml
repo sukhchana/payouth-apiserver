@@ -506,12 +506,6 @@ components:
           type: string
         latitude:
           type: string
-    Gender:
-      type: string
-      enum:
-        - male
-        - female
-        - other
     User:
       type: object
       properties:
@@ -522,7 +516,7 @@ components:
           type: string
           example: James
         gender:
-          $ref: '#/components/schemas/Gender'
+          type: string
         dateOfBirth:
           type: string
           example: 01/01/1990
