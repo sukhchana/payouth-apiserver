@@ -5,24 +5,34 @@
  */
 package org.payouth.apiserver.api.interfaces;
 
+import org.payouth.apiserver.model.User;
+import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.payouth.apiserver.model.User;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Generated;
 import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T04:47:51.835270+01:00[Europe/London]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T10:47:57.186928900-04:00[America/New_York]")
 @Validated
 @Tag(name = "user", description = "Operations about user")
 public interface UserApi {
@@ -57,11 +67,11 @@ public interface UserApi {
 
 
     /**
-     * DELETE /user/{username} : Delete user
+     * DELETE /users/{email} : Delete user
      * This can only be done by the logged in user.
      *
-     * @param username The name that needs to be deleted (required)
-     * @return Invalid username supplied (status code 400)
+     * @param email The name that needs to be deleted (required)
+     * @return Invalid email supplied (status code 400)
      *         or User not found (status code 404)
      */
     @Operation(
@@ -70,16 +80,16 @@ public interface UserApi {
         description = "This can only be done by the logged in user.",
         tags = { "user" },
         responses = {
-            @ApiResponse(responseCode = "400", description = "Invalid username supplied"),
+            @ApiResponse(responseCode = "400", description = "Invalid email supplied"),
             @ApiResponse(responseCode = "404", description = "User not found")
         }
     )
     @RequestMapping(
         method = RequestMethod.DELETE,
-        value = "/user/{username}"
+        value = "/users/{email}"
     )
     ResponseEntity<Void> deleteUser(
-        @Parameter(name = "username", description = "The name that needs to be deleted", required = true, in = ParameterIn.PATH) @PathVariable("username") String username
+        @Parameter(name = "email", description = "The name that needs to be deleted", required = true, in = ParameterIn.PATH) @PathVariable("email") String email
     );
 
 
@@ -118,42 +128,42 @@ public interface UserApi {
 
 
     /**
-     * GET /user/{username} : Get user by user name
+     * GET /users/{email} : Get user by email
      * 
      *
-     * @param username The name that needs to be fetched. (required)
+     * @param email The user that needs to be fetched. (required)
      * @return successful operation (status code 200)
-     *         or Invalid username supplied (status code 400)
+     *         or Invalid email supplied (status code 400)
      *         or User not found (status code 404)
      */
     @Operation(
-        operationId = "getUserByName",
-        summary = "Get user by user name",
+        operationId = "getUserByEmail",
+        summary = "Get user by email",
         description = "",
         tags = { "user" },
         responses = {
             @ApiResponse(responseCode = "200", description = "successful operation", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = User.class))
             }),
-            @ApiResponse(responseCode = "400", description = "Invalid username supplied"),
+            @ApiResponse(responseCode = "400", description = "Invalid email supplied"),
             @ApiResponse(responseCode = "404", description = "User not found")
         }
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/user/{username}",
+        value = "/users/{email}",
         produces = { "application/json" }
     )
-    ResponseEntity<User> getUserByName(
-        @Parameter(name = "username", description = "The name that needs to be fetched.", required = true, in = ParameterIn.PATH) @PathVariable("username") String username
+    ResponseEntity<User> getUserByEmail(
+        @Parameter(name = "email", description = "The user that needs to be fetched.", required = true, in = ParameterIn.PATH) @PathVariable("email") String email
     );
 
 
     /**
-     * PUT /user/{username} : Update user
+     * PUT /users/{email} : Update user
      * This can only be done by the logged in user.
      *
-     * @param username name that need to be deleted (required)
+     * @param email name that need to be deleted (required)
      * @param user Update an existent user in the store (optional)
      * @return successful operation (status code 200)
      */
@@ -168,11 +178,11 @@ public interface UserApi {
     )
     @RequestMapping(
         method = RequestMethod.PUT,
-        value = "/user/{username}",
+        value = "/users/{email}",
         consumes = { "application/json" }
     )
     ResponseEntity<Void> updateUser(
-        @Parameter(name = "username", description = "name that need to be deleted", required = true, in = ParameterIn.PATH) @PathVariable("username") String username,
+        @Parameter(name = "email", description = "name that need to be deleted", required = true, in = ParameterIn.PATH) @PathVariable("email") String email,
         @Parameter(name = "User", description = "Update an existent user in the store") @Valid @RequestBody(required = false) User user
     );
 

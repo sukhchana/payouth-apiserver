@@ -24,6 +24,8 @@ tags:
     description: Add/View comments
   - name: user
     description: Operations about user
+  - name: candidate
+    description: Condidate profile
 paths:
   /elections:
     get:
@@ -221,17 +223,17 @@ paths:
           description: Bad request
         "404":
           description: Not Found
-  /user/{username}:
+  /users/{email}:
     get:
       tags:
         - user
-      summary: Get user by user name
+      summary: Get user by email
       description: ""
-      operationId: getUserByName
+      operationId: getUserByEmail
       parameters:
-        - name: username
+        - name: email
           in: path
-          description: The name that needs to be fetched.
+          description: The user that needs to be fetched.
           required: true
           schema:
             type: string
@@ -243,7 +245,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
         "400":
-          description: Invalid username supplied
+          description: Invalid email supplied
         "404":
           description: User not found
     put:
@@ -253,7 +255,7 @@ paths:
       description: This can only be done by the logged in user.
       operationId: updateUser
       parameters:
-        - name: username
+        - name: email
           in: path
           description: name that need to be deleted
           required: true
@@ -275,7 +277,7 @@ paths:
       description: This can only be done by the logged in user.
       operationId: deleteUser
       parameters:
-        - name: username
+        - name: email
           in: path
           description: The name that needs to be deleted
           required: true
@@ -283,7 +285,7 @@ paths:
             type: string
       responses:
         "400":
-          description: Invalid username supplied
+          description: Invalid email supplied
         "404":
           description: User not found
   /elections/{electionId}/comments:
@@ -392,7 +394,109 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Comment'
+  /candidates:
+    get:
+      tags:
+        - candidate
+      summary: Returns list of elections
+      operationId: getCandidates
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Candidate'
+    post:
+      tags:
+        - candidate
+      summary: Create Candidate
+      description: Create a new Candidate.
+      operationId: createCandidate
+      requestBody:
+        description: Created Candidate object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Candidate'
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Candidate'
+        "400":
+          description: Invalid candidate supplied
 
+  /candidates/{fistName}/{lastName}:
+    get:
+      tags:
+        - candidate
+      summary: Returns a specific candidate
+      operationId: getCandidateByNameNadLatName
+      parameters:
+        - name: fistName
+          in: path
+          description:  The first name of the candidate
+          required: true
+          schema:
+            type: string
+        - name: lastName
+          in: path
+          description: The last name of the candidate
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Candidate'
+        "400":
+          description: Invalid candidate supplied
+        "404":
+          description: Candidate not found
+    put:
+      tags:
+        - candidate
+      summary: update candidate
+      description: update a new candidate.
+      operationId: updateCandidate
+      parameters:
+        - name: fistName
+          in: path
+          description: The first name of the candidate
+          required: true
+          schema:
+            type: string
+        - name: lastName
+          in: path
+          description: The last name of the candidate
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: update candidate object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Candidate'
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Candidate'
+        "400":
+          description: Invalid candidate supplied
+        "404":
+          description: Candidate not found
 components:
   schemas:
     Location:
@@ -402,6 +506,12 @@ components:
           type: string
         latitude:
           type: string
+    Gender:
+      type: string
+      enum:
+        - male
+        - female
+        - other
     User:
       type: object
       properties:
@@ -409,9 +519,6 @@ components:
           type: integer
           format: int64
           example: 10
-        username:
-          type: string
-          example: theUser
         firstName:
           type: string
           example: John
@@ -419,14 +526,12 @@ components:
           type: string
           example: James
         gender:
-          type: string
-          enum:
-            - male
-            - female
-            - other
+          $ref: '#/components/schemas/Gender'
         dateOfBirth:
           type: string
           example: 01/01/1990
+        race:
+          type: string
         email:
           type: string
           example: john@email.com
@@ -572,3 +677,43 @@ components:
           examples:
             - This election will bring in a true difference
             - I will vote
+
+    PoliticalParty:
+      type: string
+      enum:
+        - Democratic
+        - Republican
+        - Green
+        - Constitution
+        - Independent
+        - Socialist
+        - Communist
+        - Liberal
+        - Reform
+
+    Candidate:
+      type: object
+      description: Candidate profile
+      properties:
+        gender:
+          $ref: '#/components/schemas/Gender'
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: James
+        picture:
+          type: string
+        party:
+          $ref: '#/components/schemas/PoliticalParty'
+        pledges:
+          type: array
+          items:
+            type: string
+          description: list  summaries of public statements made by the candidate in speeche
+
+
+
+
+

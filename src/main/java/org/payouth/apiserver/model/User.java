@@ -1,74 +1,46 @@
 package org.payouth.apiserver.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import java.net.URI;
+import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.payouth.apiserver.model.Gender;
+import org.payouth.apiserver.model.UserLocation;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.io.Serializable;
+import java.time.OffsetDateTime;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+
+import java.util.*;
 import javax.annotation.Generated;
-import javax.validation.Valid;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * User
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T04:31:09.763985+01:00[Europe/London]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-22T10:47:57.186928900-04:00[America/New_York]")
 public class User implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
   private Long id;
 
-  private String username;
-
   private String firstName;
 
   private String lastName;
 
-  /**
-   * Gets or Sets gender
-   */
-  public enum GenderEnum {
-    MALE("male"),
-    
-    FEMALE("female"),
-    
-    OTHER("other");
-
-    private String value;
-
-    GenderEnum(String value) {
-      this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static GenderEnum fromValue(String value) {
-      for (GenderEnum b : GenderEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-  }
-
-  private GenderEnum gender;
+  private Gender gender;
 
   private String dateOfBirth;
+
+  private String race;
 
   private String email;
 
@@ -95,26 +67,6 @@ public class User implements Serializable {
 
   public void setId(Long id) {
     this.id = id;
-  }
-
-  public User username(String username) {
-    this.username = username;
-    return this;
-  }
-
-  /**
-   * Get username
-   * @return username
-  */
-  
-  @Schema(name = "username", example = "theUser", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("username")
-  public String getUsername() {
-    return username;
-  }
-
-  public void setUsername(String username) {
-    this.username = username;
   }
 
   public User firstName(String firstName) {
@@ -157,7 +109,7 @@ public class User implements Serializable {
     this.lastName = lastName;
   }
 
-  public User gender(GenderEnum gender) {
+  public User gender(Gender gender) {
     this.gender = gender;
     return this;
   }
@@ -166,14 +118,14 @@ public class User implements Serializable {
    * Get gender
    * @return gender
   */
-  
+  @Valid 
   @Schema(name = "gender", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("gender")
-  public GenderEnum getGender() {
+  public Gender getGender() {
     return gender;
   }
 
-  public void setGender(GenderEnum gender) {
+  public void setGender(Gender gender) {
     this.gender = gender;
   }
 
@@ -195,6 +147,26 @@ public class User implements Serializable {
 
   public void setDateOfBirth(String dateOfBirth) {
     this.dateOfBirth = dateOfBirth;
+  }
+
+  public User race(String race) {
+    this.race = race;
+    return this;
+  }
+
+  /**
+   * Get race
+   * @return race
+  */
+  
+  @Schema(name = "race", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("race")
+  public String getRace() {
+    return race;
+  }
+
+  public void setRace(String race) {
+    this.race = race;
   }
 
   public User email(String email) {
@@ -275,11 +247,11 @@ public class User implements Serializable {
     }
     User user = (User) o;
     return Objects.equals(this.id, user.id) &&
-        Objects.equals(this.username, user.username) &&
         Objects.equals(this.firstName, user.firstName) &&
         Objects.equals(this.lastName, user.lastName) &&
         Objects.equals(this.gender, user.gender) &&
         Objects.equals(this.dateOfBirth, user.dateOfBirth) &&
+        Objects.equals(this.race, user.race) &&
         Objects.equals(this.email, user.email) &&
         Objects.equals(this.location, user.location) &&
         Objects.equals(this.completedStages, user.completedStages);
@@ -287,7 +259,7 @@ public class User implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, username, firstName, lastName, gender, dateOfBirth, email, location, completedStages);
+    return Objects.hash(id, firstName, lastName, gender, dateOfBirth, race, email, location, completedStages);
   }
 
   @Override
@@ -295,11 +267,11 @@ public class User implements Serializable {
     StringBuilder sb = new StringBuilder();
     sb.append("class User {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    username: ").append(toIndentedString(username)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
     sb.append("    gender: ").append(toIndentedString(gender)).append("\n");
     sb.append("    dateOfBirth: ").append(toIndentedString(dateOfBirth)).append("\n");
+    sb.append("    race: ").append(toIndentedString(race)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    location: ").append(toIndentedString(location)).append("\n");
     sb.append("    completedStages: ").append(toIndentedString(completedStages)).append("\n");
